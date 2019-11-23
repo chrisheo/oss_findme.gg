@@ -133,6 +133,34 @@ var summonerLevel;  //소환사 레벨
               champ_pic[j] = temp_pic;
             }
           }
+         const defaultMMR = [
+           {"mmr" : 900, "tier" : "iron", "rank": 4}
+           {"mmr" : 950, "tier" : "iron", "rank": 3}
+           {"mmr" : 1000, "tier" : "iron", "rank": 2}
+           {"mmr" : 1050, "tier" : "iron", "rank": 1}
+           { "mmr" : 1100, "tier" : "bronze", "rank": 4 },
+           { "mmr" : 1150, "tier" : "bronze", "rank": 3 },
+           { "mmr" : 1200, "tier" : "bronze", "rank": 2 },
+           { "mmr" : 1250, "tier" : "bronze", "rank": 1 },
+           { "mmr" : 1300, "tier" : "silver", "rank": 4 },
+           { "mmr" : 1350, "tier" : "silver", "rank": 3 },
+           { "mmr" : 1400, "tier" : "silver", "rank": 2 },
+           { "mmr" : 1450, "tier" : "silver", "rank": 1 },
+           { "mmr" : 1500, "tier" : "gold", "rank": 4 },
+           { "mmr" : 1550, "tier" : "gold", "rank": 3 },
+           { "mmr" : 1600, "tier" : "gold", "rank": 2 },
+           { "mmr" : 1650, "tier" : "gold", "rank": 1 },
+           { "mmr" : 1700, "tier" : "platinum", "rank": 4 },
+           { "mmr" : 1750, "tier" : "platinum", "rank": 3 },
+           { "mmr" : 1800, "tier" : "platinum", "rank": 2 },
+           { "mmr" : 1850, "tier" : "platinum", "rank": 1 },
+           { "mmr" : 1900, "tier" : "diamond", "rank": 4 },
+           { "mmr" : 1950, "tier" : "diamond", "rank": 3 },
+           { "mmr" : 2000, "tier" : "diamond", "rank": 2 },
+           { "mmr" : 2050, "tier" : "diamond", "rank": 1 },
+           { "mmr" : 2100, "tier" : "master", "rank": 1 },
+           { "mmr" : 2700, "tier" : "challenger", "rank": 1 },
+         ] 
 
           res.render('index', { title: req.params.username ,
           c_id: champ_id,
