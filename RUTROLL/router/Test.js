@@ -134,10 +134,10 @@ var summonerLevel;  //소환사 레벨
             }
           }
          const defaultMMR = [
-           {"mmr" : 900, "tier" : "iron", "rank": 4}
-           {"mmr" : 950, "tier" : "iron", "rank": 3}
-           {"mmr" : 1000, "tier" : "iron", "rank": 2}
-           {"mmr" : 1050, "tier" : "iron", "rank": 1}
+           {"mmr" : 900, "tier" : "iron", "rank": 4},
+           {"mmr" : 950, "tier" : "iron", "rank": 3},
+           {"mmr" : 1000, "tier" : "iron", "rank": 2},
+           {"mmr" : 1050, "tier" : "iron", "rank": 1},
            { "mmr" : 1100, "tier" : "bronze", "rank": 4 },
            { "mmr" : 1150, "tier" : "bronze", "rank": 3 },
            { "mmr" : 1200, "tier" : "bronze", "rank": 2 },
@@ -160,7 +160,9 @@ var summonerLevel;  //소환사 레벨
            { "mmr" : 2050, "tier" : "diamond", "rank": 1 },
            { "mmr" : 2100, "tier" : "master", "rank": 1 },
            { "mmr" : 2700, "tier" : "challenger", "rank": 1 },
-         ] 
+         ]
+
+
 
           res.render('index', { title: req.params.username ,
           c_id: champ_id,
