@@ -21,34 +21,40 @@
     </script>
   </head>
   <body>
-    <div class="imgOpacity">
-      <div class="center">
-        <img src= "FindMelogo.png" width = 300, height = 300/>
-      </div>
-      <div class="center">
-     	  <input type="text" class="input_text" placeholder="소환사 이름">
+
+
+        <div class="imgOpacity">
+        <div class="center">
+          <img src= "/FindMelogo.png" width = 150, height = 150/>
+        </div>
+        <div class="center2">
+        <input type="text" class="input_text" placeholder="소환사 이름">
         <span class="input-group-btn">
-        <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
-      </span>
-      </div>
+          <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
+        </span>
+        </div>
+        </div>
+
+
+
+
       <br></br>
       <font size=10em>
         <strong>
           <%= c_summoner + "\n"%>
         </strong>
       </font>
-          <div class="center">
-          <img src= <%=c_imgtier%> width=120, height=120>
-          <span class="center">
-            <%= "Tier : " + c_tier + " " + c_rank + " / " + c_leaguePoint + "점"%>
-          </span>
-          <br class="center">
-          <%= "Win : " + c_wins + "   /   Lose : " + c_losses%>
-          </br>
-          </div>
-          <div class="center">
-          <%= "승률 : " + ((c_wins/(c_wins+c_losses))*100).toFixed(2) + "%" %>
-        </div>
+
+      <table class="basic">
+            <tbody>
+              <tr><td><%= "Tier : " + c_tier + " " + c_rank + " / " + c_leaguePoint + "점"%></td></tr>
+              <tr><td><%= "Win : " + c_wins + "   /   Lose : " + c_losses%></td></tr>
+              <tr><td><%= "승률 : " + ((c_wins/(c_wins+c_losses))*100).toFixed(2) + "%" %></td></tr>
+              <tr><td><%= "캐리력 : " + (c_wins/c_losses*2).toFixed(2) %></td></tr>
+            </tbody>
+        </table>
+
+
         <br></br>
           <div class="center">
             <strong>
@@ -60,10 +66,13 @@
             <strong>
           <%= "로테이션 챔피언: "  %>
         </strong>
-          <% for (var i=0; i<c_lotation.length-1; i++){ %>
-              <img src= <%=c_lotation[i]%> width=50, height=50>
+          <% for (var i=0; i<c_rotation.length-1; i++){ %>
+              <img src= <%=c_rotation[i]%> width=50, height=50>
               <% } %>
       </div>
+
+      <br></br>
+
       <% for (var i=0; i<c_id.length-1; i++){ %>
         <div class="champImage">
           <div class="center">

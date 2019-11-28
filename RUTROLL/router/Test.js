@@ -10,7 +10,7 @@ var id; //소환사ID
 var accountId; //계정Id
 var name; //소환사 이름
 var summonerLevel;  //소환사
-var lotation_champ = new Array();
+var rotation_champ = new Array();
 
   app.get('/', function(req, res) {
   	  res.render('main', { title: 'R U TROLL?' });
@@ -46,9 +46,9 @@ var lotation_champ = new Array();
         var champ_point = new Array();
         var champ_id = new Array();
         var champ_name = new Array();
-        var lotation_name = new Array();
+        var rotation_name = new Array();
         var champ_pic = new Array();
-        var lotation_pic =new Array();
+        var rotation_pic =new Array();
         var champions_length = Object.keys(info_champ_json).length;
 
 	//console.log("\n\ninfo_champ_json\n\n", info_champ_json);
@@ -67,15 +67,15 @@ var lotation_champ = new Array();
           champ_id[i] = info_champ_json[i]["championId"];
 
         }
-        var lotationUrl = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations?api_key="+apikey;
-        request(lotationUrl,function(error,response,body){
-          var info_lotation = JSON.parse(body);
-          var keys = Object.keys(info_lotation);
-          for(var k =0; k < info_lotation[keys[0]].length;k++)
+        var rotationUrl = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations?api_key="+apikey;
+        request(rotationUrl,function(error,response,body){
+          var info_rotation = JSON.parse(body);
+          var keys = Object.keys(info_rotation);
+          for(var k =0; k < info_rotation[keys[0]].length;k++)
           {
-            lotation_champ[k] =info_lotation[keys[0]][k]
-        console.log("lotation_champ:"+lotation_champ[k]);
-        console.log("로테길이:"+lotation_champ.length);
+            rotation_champ[k] =info_rotation[keys[0]][k]
+        console.log("rotation_champ:"+rotation_champ[k]);
+        console.log("로테길이:"+rotation_champ.length);
         }
 
 
@@ -100,9 +100,9 @@ var lotation_champ = new Array();
           for(var i=0; i < champ_id.length; i++){
                 for(js in champion){
                   for(j in champion[js]){
-                    if(champion[js]["key"] == lotation_champ[i]){
-                      lotation_name[i] = champion[js]["id"];
-                      lotation_pic[i] = "http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+lotation_name[i]+".png";
+                    if(champion[js]["key"] == rotation_champ[i]){
+                      rotation_name[i] = champion[js]["id"];
+                      rotation_pic[i] = "http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+rotation_name[i]+".png";
 
                     }
                   }
@@ -202,7 +202,7 @@ var lotation_champ = new Array();
           c_name: champ_name,
           c_point: champ_point,
           c_pic: champ_pic,
-          c_lotation : lotation_pic,
+          c_rotation : rotation_pic,
           c_summoner: summoner,
           c_wins: wins,
           c_losses: losses,
