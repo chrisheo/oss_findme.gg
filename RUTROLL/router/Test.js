@@ -2,7 +2,7 @@ module.exports = function(app){
 
 var request = require("request");
 var urlenconde = require('urlencode');
-var apikey = "RGAPI-d871b6f2-cf20-4e39-8ee1-4c3a663b2d01"//api
+var apikey = "RGAPI-539b7900-4377-44be-80ea-f0a88bb9b641"//api
 
 var profileIconId;  //아이콘 번호
 var revisionDate; //수정날짜
@@ -10,6 +10,7 @@ var id; //소환사ID
 var accountId; //계정Id
 var name; //소환사 이름
 var summonerLevel;  //소환사
+var lotation_champ = new Array();
 
   app.get('/', function(req, res) {
   	  res.render('main', { title: 'R U TROLL?' });
@@ -25,7 +26,7 @@ var summonerLevel;  //소환사
 		// status code가 200이 아니면 오류가 있었던 것으로 간주하고 함수 종료.
 		console.log('response code ', response.statusCode);
 		if (response.statusCode != 200) {
-			console.log('Error with response code ', response.statusCode);
+			console.log('Error with response code22 ', response.statusCode);
 			res.end();
 			return;
 		}
@@ -45,7 +46,9 @@ var summonerLevel;  //소환사
         var champ_point = new Array();
         var champ_id = new Array();
         var champ_name = new Array();
+        var lotation_name = new Array();
         var champ_pic = new Array();
+        var lotation_pic =new Array();
         var champions_length = Object.keys(info_champ_json).length;
 
 	//console.log("\n\ninfo_champ_json\n\n", info_champ_json);
@@ -53,7 +56,7 @@ var summonerLevel;  //소환사
 		// status code가 200이 아니면 종료.
 		if (info_champ_json["status"] != undefined) {
 			if (info_champ_json["status"]["status_code"] != 200) {
-				console.log('Error with response code ', info_champ_json["status"]["status_code"]);
+				console.log('Error with response code11 ', info_champ_json["status"]["status_code"]);
 				res.end();
 				return;
 			}
@@ -62,7 +65,22 @@ var summonerLevel;  //소환사
         for(var i=0; i < champions_length; i++){
           champ_point[i] = (info_champ_json[i]["championPoints"]);
           champ_id[i] = info_champ_json[i]["championId"];
+
         }
+        var lotationUrl = "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations?api_key="+apikey;
+        request(lotationUrl,function(error,response,body){
+          var info_lotation = JSON.parse(body);
+          var keys = Object.keys(info_lotation);
+          for(var k =0; k < info_lotation[keys[0]].length;k++)
+          {
+            lotation_champ[k] =info_lotation[keys[0]][k]
+        console.log("lotation_champ:"+lotation_champ[k]);
+        console.log("로테길이:"+lotation_champ.length);
+        }
+
+
+
+
 
         var staticUrl = "http://ddragon.leagueoflegends.com/cdn/9.23.1/data/en_US/champion.json";
         request(staticUrl,function(error,response,body){
@@ -74,10 +92,25 @@ var summonerLevel;  //소환사
                     if(champion[js]["key"] == champ_id[i]){
                       champ_name[i] = champion[js]["id"];
                       champ_pic[i] = "http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+champ_name[i]+".png";
+
                     }
                   }
                 }
           }
+          for(var i=0; i < champ_id.length; i++){
+                for(js in champion){
+                  for(j in champion[js]){
+                    if(champion[js]["key"] == lotation_champ[i]){
+                      lotation_name[i] = champion[js]["id"];
+                      lotation_pic[i] = "http://ddragon.leagueoflegends.com/cdn/9.23.1/img/champion/"+lotation_name[i]+".png";
+
+                    }
+                  }
+                }
+          }
+
+          console.log("챔프길이:"+champ_pic.length);
+
           var userLeagueUrl = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"+ urlenconde(id)+"?api_key=" + apikey;
           request(userLeagueUrl,function(error,response,body){
             var info_user_league_json = JSON.parse(body);
@@ -169,6 +202,7 @@ var summonerLevel;  //소환사
           c_name: champ_name,
           c_point: champ_point,
           c_pic: champ_pic,
+          c_lotation : lotation_pic,
           c_summoner: summoner,
           c_wins: wins,
           c_losses: losses,
@@ -180,6 +214,7 @@ var summonerLevel;  //소환사
         });
       });
     });
+  });
     });
   });
 };

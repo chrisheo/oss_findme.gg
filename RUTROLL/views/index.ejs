@@ -56,6 +56,14 @@
           <%= "point: " + (c_wins/c_losses*2).toFixed(2) %>
         </strong>
         </div>
+        <div class="center">
+            <strong>
+          <%= "로테이션 챔피언: "  %>
+        </strong>
+          <% for (var i=0; i<c_lotation.length-1; i++){ %>
+              <img src= <%=c_lotation[i]%> width=50, height=50>
+              <% } %>
+      </div>
       <% for (var i=0; i<c_id.length-1; i++){ %>
         <div class="champImage">
           <div class="center">
@@ -64,6 +72,8 @@
           <%= "point: " + (1000000/c_point[i]).toFixed(2) %>
           <% } %>
         </div>
+
+
 </div>
 </body>
 </html>
