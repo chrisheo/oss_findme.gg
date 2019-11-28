@@ -9,7 +9,7 @@ var revisionDate; //수정날짜
 var id; //소환사ID
 var accountId; //계정Id
 var name; //소환사 이름
-var summonerLevel;  //소환사 레벨
+var summonerLevel;  //소환사
 
   app.get('/', function(req, res) {
   	  res.render('main', { title: 'R U TROLL?' });
@@ -48,7 +48,7 @@ var summonerLevel;  //소환사 레벨
         var champ_pic = new Array();
         var champions_length = Object.keys(info_champ_json).length;
 
-		console.log("\n\ninfo_champ_json\n\n", info_champ_json);
+	//console.log("\n\ninfo_champ_json\n\n", info_champ_json);
 
 		// status code가 200이 아니면 종료.
 		if (info_champ_json["status"] != undefined) {
@@ -81,7 +81,7 @@ var summonerLevel;  //소환사 레벨
           var userLeagueUrl = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"+ urlenconde(id)+"?api_key=" + apikey;
           request(userLeagueUrl,function(error,response,body){
             var info_user_league_json = JSON.parse(body);
-			console.log("userLeagueUrl:", userLeagueUrl);
+			//console.log("userLeagueUrl:", userLeagueUrl);
             if(info_user_league_json[0] != null){
             var leagueId = info_user_league_json[0]["leagueId"];
             var wins = info_user_league_json[0]["wins"];
