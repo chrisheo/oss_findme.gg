@@ -62,6 +62,7 @@
             <strong>
           <%= "로테이션 챔피언: "  %>
         </strong>
+<<<<<<< HEAD
           <% for (var i=0; i<c_rotation.length-1; i++){ %>
               <img src= <%=c_rotation[i]%> width=50, height=50>
               <% } %>
@@ -69,6 +70,35 @@
 
       <br></br>
 
+=======
+        </div>
+        <div class="center">
+          <strong>
+        <%= "추측 MMR:"  %>
+        <%if (c_tier=="SILVER") {%>
+          <%="1200~1500"%>
+          <%}%>
+        <%if (c_tier=="GOLD") {%>
+          <%="1500~1800"%>
+          <%}%>
+        <%if (c_tier=="PLATINUM") {%>
+          <%="1800~2100"%>
+          <%}%>
+        <%if (c_tier=="DIAMOND") {%>
+          <%="2100~2400"%>
+          <%}%>
+        <%if (c_tier=="MASTER") {%>
+            <%="2400~2600"%>
+            <%}%>
+        <%if (c_tier=="GRANDMASTER") {%>
+            <%="2600~2800"%>
+            <%}%>
+        <%if (c_tier=="CHALLENGER") {%>
+            <%=">3000"%>
+            <%}%>
+      </strong>
+      </div>
+>>>>>>> master
       <% for (var i=0; i<c_id.length-1; i++){ %>
         <div class="champImage">
           <div class="center">
