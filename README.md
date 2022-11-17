@@ -1,70 +1,86 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# FindMe.GG
 
-## Available Scripts
+## 프로젝트 소개
 
-In the project directory, you can run:
+- `Riot Games Api`를 통한 TFT 정보 사이트 만들기 (FindMe.GG 마더프로젝트 개선)
 
-### `npm start`
+## 활용 가능한 데이터 `(API_KEY Required.)`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### `TFT-SUMMONER`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-name/{summonerName}
 
-### `npm test`
+- 소환사 이름 - `name`
+- 소환사 레벨 - `summonerLevel`
+- 소환사 정보 갱신 시각 - `revisionDate`
+- 암호화된 소환사 아이디 - `summonerId`
+- 암호화된 계정 아이디 - `accountId`
+* 'puuid' => matchId를 얻는 데 사용
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 'TFT-LEAGUE'
 
-### `npm run build`
+> https://kr.api.riotgames.com/tft/league/v1/entries/by-summoner/{summonerId}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 암호화된 소환사 아이디 - 'summonerId'
+- 소환사의 랭크 - 'rank'
+- 소환사의 이긴 판수 - 'wins'
+- 소환사의 진 판수 - 'losses'
+- 소환사의 리그포인트 - 'leaguePoints'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `TFT-MATCH`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> https://kr.api.riotgames.com/tft/match/v1/matches/{matchId}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 전적 리스트 - `matches`
+- 게임 모드 - `queue`
+- 게임 아이디 - `gameId`
+- 게임 모드 - 'queue_id'
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 개발 히스토리 
+- 1)
+  - 첫 미팅, 주제 선정 및 수정 & 추가 사항 결정
 
-## Learn More
+- 2)
+  - 랭크/일반/더블업 구분
+  - 소환사 레벨, 아이콘 추가(?)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 3)
+  - 전적 보기 추가
+   - 최종 덱, 등수, ...
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 4)
+  - 추천 덱 추가
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 빌드 방법
 
-### Analyzing the Bundle Size
+### 1) LoL Api 키를 발급받습니다. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  - https://developer.riotgames.com/
 
-### Making a Progressive Web App
+### 2) npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  - npm install
 
-### Advanced Configuration
+### 3) 해당 Repository를 clone 해주세요.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  - http://khuhub.khu.ac.kr/2017103973/Open_Source_Project.git
 
-### Deployment
+### 4) Test.js를 수정해주세요.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  - var apikey = "your api key"
 
-### `npm run build` fails to minify
+## 사용 방법
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - 1) 주소... 를 입력해주세요.
+
+  - 2) 소환사 이름에 검색하고 싶은 소환사 이름을 입력해준 후 click! 버튼을 클릭해주세요.
+
+  - 3) 소환사 정보(티어, 승률, 전적)가 사이트에 표시됩니다.
+
+      a. 전적기록 보기 버튼을 클릭하면 전적 기록을 볼 수 있는 창으로 넘아갑니다.
+
