@@ -10,7 +10,7 @@
 ## 기술 스택
   1. Frontend : React
   2. Backend : Node.js
-  3. AWS : 
+  3. AWS : EC2
 
 ### `TFT-SUMMONER`
 
