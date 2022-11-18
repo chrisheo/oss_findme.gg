@@ -1,56 +1,86 @@
 
 # FindMe.GG
 
-## 개발 목표
+## 프로젝트 소개
 
-- `Riot Games Api`를 통한 리그오브레전드 정보 사이트 만들기
+- `Riot Games Api`를 통한 TFT 정보 사이트 만들기 (FindMe.GG 마더프로젝트 개선)
 
 ## 활용 가능한 데이터 `(API_KEY Required.)`
 
-### `SUMMONER-V4`
+### `TFT-SUMMONER`
 
-> https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}
+> https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-name/{summonerName}
 
-- 소환사 닉네임 - `name`
+- 소환사 이름 - `name`
 - 소환사 레벨 - `summonerLevel`
 - 소환사 정보 갱신 시각 - `revisionDate`
-- 암호화된 소환사 아이디 - `id`
+- 암호화된 소환사 아이디 - `summonerId`
 - 암호화된 계정 아이디 - `accountId`
+* 'puuid' => matchId를 얻는 데 사용
 
-### `CHAMPION-MASTERY-V4`
+### 'TFT-LEAGUE'
 
-> https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}
+> https://kr.api.riotgames.com/tft/league/v1/entries/by-summoner/{summonerId}
 
-- 챔피언 아이디 - `championId`
-- 챔피언 숙련도 레벨 - `championLevel`
-- 챔피언 숙련도 점수 - `championPoints`
-- 챔피언 남은 숙련도 점수 - `championPointsUntilNextLevel` (5레벨에 0 고정)
-- 마지막 플레이 시각 - `lastPlayTime`
-- 챔피언 레벨 토큰 개수 - `tokensEarned` (5레벨 이후를 위한 토큰)
-- 마지막 챔피언 레벨 이후의 숙련도 점수 - `championPointsSinceLastLevel`
-- 소환사 아이디 - `summonerId` (암호화)
+- 암호화된 소환사 아이디 - 'summonerId'
+- 소환사의 랭크 - 'rank'
+- 소환사의 이긴 판수 - 'wins'
+- 소환사의 진 판수 - 'losses'
+- 소환사의 리그포인트 - 'leaguePoints'
 
-### `CHAMPION-V3`
 
-> https://kr.api.riotgames.com/lol/platform/v3/champion-rotations
 
-- 금주의 무료 챔피언 - `freeChampionIds`
-- 뉴비를 위한 무료 챔피언 - `freeChampionIdsForNewPlayers`
+### `TFT-MATCH`
+
+> https://kr.api.riotgames.com/tft/match/v1/matches/{matchId}
+
+- 전적 리스트 - `matches`
+- 게임 모드 - `queue`
+- 게임 아이디 - `gameId`
+- 게임 모드 - 'queue_id'
+
 
 ## 개발 히스토리 
-- 2019-11-17
-  - 첫 미팅, 개발툴 및 환경 설정, 주제 선정
+- 1)
+  - 첫 미팅, 주제 선정 및 수정 & 추가 사항 결정
 
-- 2019-11-23
-  - 마더 프로젝트 오류 수정, API키 요청 -> 마더 프로젝트 실행가능
+- 2)
+  - 랭크/일반/더블업 구분
+  - 소환사 레벨, 아이콘 추가(?)
 
-- 2019-11-28
-  - css 수정, 챔피언 로테이션 API추가, 캐리력 MMR 추가
+- 3)
+  - 전적 보기 추가
+   - 최종 덱, 등수, ...
 
-- 2019-12-04
-  - 최종 미팅, 프로젝트 점검 및 발표자료 작성
+- 4)
+  - 추천 덱 추가
 
 
-```python
+## 빌드 방법
 
-```
+### 1) LoL Api 키를 발급받습니다. 
+
+  - https://developer.riotgames.com/
+
+### 2) npm install
+
+  - npm install
+
+### 3) 해당 Repository를 clone 해주세요.
+
+  - http://khuhub.khu.ac.kr/2017103973/Open_Source_Project.git
+
+### 4) Test.js를 수정해주세요.
+
+  - var apikey = "your api key"
+
+## 사용 방법
+
+  - 1) 주소... 를 입력해주세요.
+
+  - 2) 소환사 이름에 검색하고 싶은 소환사 이름을 입력해준 후 click! 버튼을 클릭해주세요.
+
+  - 3) 소환사 정보(티어, 승률, 전적)가 사이트에 표시됩니다.
+
+      a. 전적기록 보기 버튼을 클릭하면 전적 기록을 볼 수 있는 창으로 넘아갑니다.
+
