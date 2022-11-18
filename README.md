@@ -7,6 +7,11 @@
 
 ## 활용 가능한 데이터 `(API_KEY Required.)`
 
+## 기술 스택
+  1. Frontend : React
+  2. Backend : Node.js
+  3. AWS : 
+
 ### `TFT-SUMMONER`
 
 > https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-name/{summonerName}
@@ -16,19 +21,17 @@
 - 소환사 정보 갱신 시각 - `revisionDate`
 - 암호화된 소환사 아이디 - `summonerId`
 - 암호화된 계정 아이디 - `accountId`
-* 'puuid' => matchId를 얻는 데 사용
+* `puuid` => matchId를 얻는 데 사용
 
-### 'TFT-LEAGUE'
+### `TFT-LEAGUE`
 
 > https://kr.api.riotgames.com/tft/league/v1/entries/by-summoner/{summonerId}
 
-- 암호화된 소환사 아이디 - 'summonerId'
-- 소환사의 랭크 - 'rank'
-- 소환사의 이긴 판수 - 'wins'
-- 소환사의 진 판수 - 'losses'
-- 소환사의 리그포인트 - 'leaguePoints'
-
-
+- 암호화된 소환사 아이디 - `summonerId`
+- 소환사의 랭크 - `rank`
+- 소환사의 이긴 판수 - `wins`
+- 소환사의 진 판수 - `losses`
+- 소환사의 리그포인트 - `leaguePoints`
 
 ### `TFT-MATCH`
 
@@ -37,23 +40,14 @@
 - 전적 리스트 - `matches`
 - 게임 모드 - `queue`
 - 게임 아이디 - `gameId`
-- 게임 모드 - 'queue_id'
+- 게임 모드 - `queue_id`
 
 
 ## 개발 히스토리 
-- 1)
-  - 첫 미팅, 주제 선정 및 수정 & 추가 사항 결정
-
-- 2)
-  - 랭크/일반/더블업 구분
-  - 소환사 레벨, 아이콘 추가(?)
-
-- 3)
-  - 전적 보기 추가
-   - 최종 덱, 등수, ...
-
-- 4)
-  - 추천 덱 추가
+- 2022-11-10
+  - 주제 선정, 역할 분담, team repository 생성, 마더프로젝트 fork(Findme.gg)
+- 2022-11-17
+  - api 분석, api키 요청, README.md 생성&최초 설정, AWS 세팅
 
 
 ## 빌드 방법
@@ -68,7 +62,7 @@
 
 ### 3) 해당 Repository를 clone 해주세요.
 
-  - http://khuhub.khu.ac.kr/2017103973/Open_Source_Project.git
+  - http://khuhub.khu.ac.kr/2018102248/Open_Source_Project.git
 
 ### 4) Test.js를 수정해주세요.
 
