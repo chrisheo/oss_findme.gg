@@ -28,19 +28,39 @@
 > https://kr.api.riotgames.com/tft/league/v1/entries/by-summoner/{summonerId}
 
 - 암호화된 소환사 아이디 - `summonerId`
+- 소환사의 티어 - `tier`
 - 소환사의 랭크 - `rank`
 - 소환사의 이긴 판수 - `wins`
 - 소환사의 진 판수 - `losses`
 - 소환사의 리그포인트 - `leaguePoints`
 
 ### `TFT-MATCH`
+> https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/{puuid}/{start&count}
 
-> https://kr.api.riotgames.com/tft/match/v1/matches/{matchId}
+- TFT-Match 의 경우 Kr 서버가 아닌, asia 서버를 이용해야한다. Match Id에 해당 국가에 해당하는 정보가 담겨있다.
+- 전적 매치 아이디 - `matchId`
 
+> https://asia.api.riotgames.com/tft/match/v1/matches/{matchId}
+
+- <infoDto>
 - 전적 리스트 - `matches`
 - 게임 모드 - `queue`
 - 게임 아이디 - `gameId`
 - 게임 모드 - `queue_id`
+
+- <ParticipantDto>
+- 최종 라운드 - `last_round`
+- 마지막 라운드 소환사 레벨 - `level`
+- 최종 등수 - `placement`
+
+- <traits>
+- 시너지 이름 - `name`
+- 시너지 스타일 - `style`
+- 적용 시너지 - `tier_current`
+
+- <units>
+- 캐릭터 종류 - `character_id`
+- 사용 아이템 - `itemNames`
 
 
 ## 개발 히스토리 
