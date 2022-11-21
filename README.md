@@ -42,23 +42,23 @@
 
 > https://asia.api.riotgames.com/tft/match/v1/matches/{matchId}
 
-- <infoDto>
+- `infoDto`
 - 전적 리스트 - `matches`
 - 게임 모드 - `queue`
 - 게임 아이디 - `gameId`
 - 게임 모드 - `queue_id`
 
-- <ParticipantDto>
+- `ParticipantDto`
 - 최종 라운드 - `last_round`
 - 마지막 라운드 소환사 레벨 - `level`
 - 최종 등수 - `placement`
 
-- <traits>
+- `traits`
 - 시너지 이름 - `name`
 - 시너지 스타일 - `style`
 - 적용 시너지 - `tier_current`
 
-- <units>
+- `units`
 - 캐릭터 종류 - `character_id`
 - 사용 아이템 - `itemNames`
 
