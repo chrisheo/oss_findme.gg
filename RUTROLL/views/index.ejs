@@ -35,77 +35,47 @@
         </div>
         </div>
 
-
-
-
       <br></br>
-      <font size=10em>
-        <strong>
-          <%= c_summoner + "\n"%>
-        </strong>
-      </font>
-
-      <table class="basic">
-            <tbody>
-              <tr><td> <img src= <%=c_imgtier%> width=120, height=120></td></tr>
-              <tr><td><%= "Tier : " + c_tier + " " + c_rank + " / " + c_leaguePoint + "점"%></td></tr>
-              <tr><td><%= "Win : " + c_wins + "   /   Lose : " + c_losses%></td></tr>
-              <tr><td><%= "승률 : " + ((c_wins/(c_wins+c_losses))*100).toFixed(2) + "%" %></td></tr>
-              <tr><td><%= "캐리력 : " + (c_wins/c_losses*2).toFixed(2) %></td></tr>
-            </tbody>
-        </table>
-
-
-        <br></br>
-
-        <div class="center">
-            <strong>
-          <%= "로테이션 챔피언: "  %>
-        </strong>
-          <% for (var i=0; i<c_rotation.length-1; i++){ %>
-              <img src= <%=c_rotation[i]%> width=50, height=50>
-              <% } %>
-      </div>
-
-      <br></br>
-
-        </div>
-        <div class="center">
+      <% if (error_message) { %>
+        <h2><%= error_message %></h2>
+      <% } else { %>
+        <font size=10em>
           <strong>
-        <%= "추측 MMR:"  %>
-        <%if (c_tier=="SILVER") {%>
-          <%="1200~1500"%>
-          <%}%>
-        <%if (c_tier=="GOLD") {%>
-          <%="1500~1800"%>
-          <%}%>
-        <%if (c_tier=="PLATINUM") {%>
-          <%="1800~2100"%>
-          <%}%>
-        <%if (c_tier=="DIAMOND") {%>
-          <%="2100~2400"%>
-          <%}%>
-        <%if (c_tier=="MASTER") {%>
-            <%="2400~2600"%>
-            <%}%>
-        <%if (c_tier=="GRANDMASTER") {%>
-            <%="2600~2800"%>
-            <%}%>
-        <%if (c_tier=="CHALLENGER") {%>
-            <%=">3000"%>
-            <%}%>
-      </strong>
-      </div>
-      <% for (var i=0; i<c_id.length-1; i++){ %>
-        <div class="champImage">
-          <div class="center">
-          <img src= <%=c_pic[i]%> width=50, height=50>
-          <%= c_name[i] %>
-          <%= "point: " + (1000000/c_point[i]).toFixed(2) %>
+            <%= c_summoner + "\n"%>
+          </strong>
+        </font>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Win</th>
+              <th>Lose</th>
+              <th>승률</th>
+              <th>캐리력</th>
+            </tr>
+          </thead>
+          <% if (c_leagueList.length>0) { %>
+          <tbody>
+            <% 
+              c_leagueList.forEach(function(league){ %>
+              <tr>
+                <td><%= league.tier + " " + league.rank + " / " + league.leaguePoints + "점"%></td>
+                <td><%= league.wins %></td>
+                <td><%= league.losses %></td>
+                <td><%= ((league.wins/(league.wins+league.losses))*100).toFixed(2) + "%"  %></td>
+                <td><%= (league.wins/league.losses*2).toFixed(2) %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+          <% } else { %>
+            <tbody>
+              <tr >
+                <td colspan="5" style="text-align: center;">no league</td>
+              </tr>
+            </tbody>
           <% } %>
-        </div>
-
-
-</div>
+      </table>
+      <% } %>
+    </div>
 </body>
 </html>
