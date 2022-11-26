@@ -1,0 +1,546 @@
+[
+  {
+    "key": "Set8_A.D.M.I.N",
+    "name": "A.D.M.I.N",
+    "description": "A.D.M.I.N programs a custom configuration per player each game.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "chromatic",
+        "min": 6
+      }
+    ]
+  },
+  {
+    "key": "Set8_AnimaSquad",
+    "name": "AnimaSquad",
+    "innate": "Anima Squad members build fame for scoring champion kills. When they pause to celebrate a kill, they permanently gain 5 maximum Health per point of fame. Fame immediately benefits the whole Anima Squad.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 4
+      },
+      {
+        "style": "gold",
+        "min": 5,
+        "max": 6
+      },
+      {
+        "style": "chromatic",
+        "min": 7
+      }
+    ]
+  },
+  {
+    "key": "Set8_Arsenal",
+    "name": "Arsenal",
+    "description": "When deploying the Arsenal champion, players may choose which weapon he will equip.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "gold",
+        "min": 1
+      }
+    ]
+  },
+  {
+    "key": "Set8_Ace",
+    "name": "Ace",
+    "description": "This trait is active only when you have exactly 1 or 4 unique Aces.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 1,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4
+      }
+    ]
+  },
+  {
+    "key": "Set8_Aegis",
+    "name": "Aegis",
+    "innate": "Your team gains bonus Magic Resist, and Aegis units gain more.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 2
+      },
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4,
+        "max": 4
+      },
+      {
+        "style": "chromatic",
+        "min": 5
+      }
+    ]
+  },
+  {
+    "key": "Set8_Brawler",
+    "name": "Bralwer",
+    "innate": "Brawlers gain additional maximum Health.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6,
+        "max": 7
+      },
+      {
+        "style": "chromatic",
+        "min": 8
+      }
+    ]
+  },
+  {
+    "key": "Set8_Civilian",
+    "name": "Civilian",
+    "innate": "If there is a Civilian alive, your team is inspired to protect them by gaining Mana every 2 seconds.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 1,
+        "max": 1
+      },
+      {
+        "style": "gold",
+        "min": 2,
+        "max": 2
+      },
+      {
+        "style": "chromatic",
+        "min": 3
+      }
+    ]
+  },
+  {
+    "key": "Set8_Corrupted",
+    "name": "Corrupted",
+    "innate": "Combat starts: Lie dormant while absorbing the souls of allies that die. Gain 20 Ability Power for each soul.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "chromatic",
+        "min": 1
+      }
+    ]
+  },
+  {
+    "key": "Set8_Defender",
+    "name": "Defender",
+    "innate": "Your team gains bonus Armor, and Defenders gain more.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6
+      }
+    ]
+  },
+  {
+    "key": "Set8_Duelist",
+    "name": "Duelist",
+    "innate": "Duelists' basic attacks grant bonus Attack Speed, up to 10 stacks.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6,
+        "max": 7
+      },
+      {
+        "style": "chromatic",
+        "min": 8
+      }
+    ]
+  },
+  {
+    "key": "Set8_Forecaster",
+    "name": "Forecaster",
+    "innate": "At the start of combat, Forecaster champions grant adjacent allies different buffs depending on the current weather, which changes every game.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "chromatic",
+        "min": 1
+      }
+    ]
+  },
+  {
+    "key": "Set8_Hacker",
+    "name": "Hacker",
+    "innate": "Hackers gain Omnivamp and summon a H4ckerr!m. Any unit placed in the rider hex will be sent to the enemy backline and is untargetable for the first 2 seconds of combat.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 2
+      },
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4 
+      }
+    ]
+  },
+  {
+    "key": "Set8_Heart",
+    "name": "Heart",
+    "innate": "When Heart units cast their Ability, your team gains stacking Ability Power for the rest of combat.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6
+      }
+    ]
+  },
+  {
+    "key": "Set8_Mascot",
+    "name": "Mascot",
+    "innate": "Your team heals a percentage of their maximum Health every 2 seconds, and Mascots heal double the amount.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6,
+        "max": 7
+      },
+      {
+        "style": "chromatic",
+        "min": 8
+      }
+    ]
+  },
+  {
+    "key": "Set8_Prankster",
+    "name": "Prankster",
+    "innate": "Once per combat at 50% Health, spawn a target dummy, move to a safe location, and restore 500 Health.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 2,
+        "max": 2
+      },
+      {
+        "style": "gold",
+        "min": 3
+      }
+    ]
+  },
+  {
+    "key": "Set8_Recon",
+    "name": "Recon",
+    "innate": "If there is an enemy nearby, Recon units will dash to safety before casting their Ability.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 2
+      },
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4
+      }
+    ]
+  },
+  {
+    "key": "Set8_Renegade",
+    "name": "Renegade",
+    "innate": "Renegade units deal bonus damage, and the last sone standing deals more.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6
+      }
+    ]
+  },
+  {
+    "key": "Set8_Spellslinger",
+    "name": "Spellslinger",
+    "innate": "Every 5 seconds, the next attack instead fires a magic orb at a random target, which explodes for 80% Ability Power as magic damage.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6,
+        "max": 7
+      },
+      {
+        "style": "chromatic",
+        "min": 8
+      }
+    ]
+  },
+  {
+    "key": "Set8_Suershot",
+    "name": "Suershot",
+    "innate": "Combat start: gain bonus Attack Damage now, and every 4 seconds.",
+    "type": "class",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "gold",
+        "min": 4
+      }
+    ]
+  },
+  {
+    "key": "Set8_Gadgeteen",
+    "name": "Gadgeteen",
+    "innate": "Gadgeteens create random modified weapon which with powerful effects. Any champion can equip the items, but they fall apart after 1 player combat.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 4
+      },
+      {
+        "style": "gold",
+        "min": 5
+      }
+    ]
+  },
+  {
+    "key": "Set8_LaserCorps",
+    "name": "LaserCorps",
+    "innate": "When a LaserCorp agent attacks or is hit by an attack, their combat drone has a 50% chance to deal magic damage to the agent's target (0.5 second cooldown). When a LaserCorps agent dies, their drone is reassigned to the nearest living agent.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 3,
+        "max": 5
+      },
+      {
+        "style": "silver",
+        "min": 6,
+        "max": 8
+      },
+      {
+        "style": "gold",
+        "min": 9
+      }
+    ]
+  },
+  {
+    "key": "Set8_Mecha:PRIME",
+    "name": "Mecha:PRIME",
+    "innate": "Combat start: the PRIME combines with the 2 nearest Mecha, absorbing 100% of their Health.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 4
+      },
+      {
+        "style": "gold",
+        "min": 5
+      }
+    ]
+  },
+  {
+    "key": "Set8_OxForce",
+    "name": "OxForce",
+    "innate": "Ox Force units gain a range of Attack Speed that ramps as they lose Health. Once per combat, they become invulnerable for 1.5 seconds as they defend the city with their last breath.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 2,
+        "max": 3
+      },
+      {
+        "style": "silver",
+        "min": 4,
+        "max": 5
+      },
+      {
+        "style": "gold",
+        "min": 6,
+        "max": 7
+      },
+      {
+        "style": "chromatic",
+        "min": 8
+      }
+    ]
+  },
+  {
+    "key": "Set8_StarGuardian",
+    "name": "StarGuardian",
+    "innate": "Gain more Mana from all sources.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "bronze",
+        "min": 3,
+        "max": 4
+      },
+      {
+        "style": "silver",
+        "min": 5,
+        "max": 6
+      },
+      {
+        "style": "gold",
+        "min": 7,
+        "max": 8
+      },
+      {
+        "style": "chromatic",
+        "min": 9
+      }
+    ]
+  },
+  {
+    "key": "Set8_Supers",
+    "name": "Supers",
+    "innate": "Combat start: strike a pose that grants your team 20% bonus damage, which increases by 6% for every 3-star champion on your team.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "gold",
+        "min": 3
+      }
+    ]
+  },
+  {
+    "key": "Set8_Threat",
+    "name": "Threat",
+    "innate": "Threats do not have a Trait bonus, but instead have powerful Abilities and increased base stats.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "gold",
+        "min": 1
+      }
+    ]
+  },
+  {
+    "key": "Set8_Underground",
+    "name": "Underground",
+    "innate": "The Underground must sneak through the sewers and crack 9 locks to open a vault. When the vault opens, you may choose to take the loot now, or attempt another heist for even better rewards.",
+    "type": "origin",
+    "sets": [
+      {
+        "style": "silver",
+        "min": 3,
+        "max": 4
+      },
+      {
+        "style": "gold",
+        "min": 5
+      }
+    ]
+  }
+]
