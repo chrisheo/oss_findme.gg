@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+app.use(express.static(__dirname + '/public'));
 var router = require('./router/main')(app);
 var bodyParser = require('body-parser');
 
