@@ -9,7 +9,7 @@ module.exports = function (app) {
   });
 
 
-  app.get('tft/search/:username/', function (req, res) {
+  app.get('/tft/search/:username/', function (req, res) {
     // tft api url
     const summonerName = req.params.username;
     var nameUrl = `https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-name/${summonerName}?api_key=${apikey}`
@@ -18,7 +18,7 @@ module.exports = function (app) {
       var info_summoner_json = JSON.parse(body);
       console.log('summoner', body);
       if (info_summoner_json.status?.status_code) {
-        return res.render('index', {
+        return res.render('index_tft', {
           title: req.params.username,
           error_message: info_summoner_json.status?.message
         });
@@ -45,7 +45,7 @@ module.exports = function (app) {
             });
             Promise.all(promiseList).then(matches => {
               console.log('matches', matches);
-              res.render('index', {
+              res.render('index_tft', {
                 title: req.params.username,
                 error_message: false,
                 c_matchList: matches, // 게임 데이터, array
@@ -54,7 +54,7 @@ module.exports = function (app) {
               });
             })
           } else {
-            res.render('index', {
+            res.render('index_tft', {
               title: req.params.username,
               error_message: false,
               c_matchList: [],
@@ -132,7 +132,7 @@ module.exports = function (app) {
               champ_pic[j] = temp_pic;
             }
           }
-          res.render('index', { title: req.params.username ,
+          res.render('index_lol', { title: req.params.username ,
           c_id: champ_id,
           c_name: champ_name,
           c_point: champ_point,
