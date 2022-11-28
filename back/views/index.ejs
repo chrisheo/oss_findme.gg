@@ -10,19 +10,44 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <style> @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");</style>
     <script>
-    $(document).ready(function(){
+      function search() {
 
+        console.log("---------------------")
+        var tft_check = $("tft_check").val();
+        console.log(tft_check)
+
+        var name = $("input").val();
+        if (tft_check == 1) {
+          location.href = "http://localhost:3000/tft/search/" + name;
+
+        } else {
+          location.href = "http://localhost:3000/search/" + name;
+
+        }
+      }
+
+    $(document).ready(function(){
+      
 
       $("button#searchButton").click(function(){
+        console.log("---------------------")
+        var tft_check = $("tft_check").val();
+        console.log(tft_check)
+
         var name = $("input").val();
-        location.href = "http://localhost:3000/search/" + name;
+        if (tft_check == 1) {
+          location.href = "http://localhost:3000/tft/search/" + name;
+
+        } else {
+          location.href = "http://localhost:3000/search/" + name;
+
+        }
+        
       })
     });
     </script>
   </head>
   <body>
-
-
         <div class="imgOpacity">
         <div class="center">
           <img src= "/FindMelogo.png" width = 150, height = 150/>

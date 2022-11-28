@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require("request");
 const urlenconde = require('urlencode');
-const apikey = "RGAPI-816bb9a0-615c-41e0-a01e-f5e0bb68c3a6"//api
+const apikey = "RGAPI-3f849a35-01f8-4915-a606-87cfc4800ef2"//api
 router.get('/search/summoner/:username/', function (req, res) {
   //롤 api url
   const name = req.params.username;

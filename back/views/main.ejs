@@ -15,7 +15,21 @@
 
       $("button#searchButton").click(function(){
         var name = $("input").val();
-        location.href = "http://localhost:3000/search/" + name;
+        const checkbox = document.getElementById('tft_check');
+
+        // 2. checked 속성을 체크합니다.
+        const is_checked = checkbox.checked;
+        console.log("-------------------------------")
+        console.log(is_checked)
+        if(is_checked==1){
+          location.href = "http://localhost:3000/tft/search/" + name;
+
+        } else {
+          location.href = "http://localhost:3000/search/" + name;
+
+        }
+        
+        
       })
     });
     </script>
@@ -26,7 +40,12 @@
       <img src= "FindMelogo.png" width = 300, height = 300/>
     </div>
     <div class="center2">
-   	<input type="text" class="input_text" placeholder="소환사 이름">
+      <div>
+        <input type="text" class="input_text" placeholder="소환사 이름">
+        <input type="checkbox" id="tft_check" name="tft_check" checked>
+        <label for="tft_check">TFT</label>
+      </div>
+   	
     <span class="input-group-btn">
       <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
     </span>
