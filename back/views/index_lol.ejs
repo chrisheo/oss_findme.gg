@@ -53,7 +53,11 @@
           <img src= "/FindMelogo.png" width = 150, height = 150/>
         </div>
         <div class="center2">
-        <input type="text" class="input_text" placeholder="소환사 이름">
+          <div>
+            <input type="text" class="input_text" placeholder="소환사 이름">
+            <input type="checkbox" id="tft_check" name="tft_check" checked>
+            <label for="tft_check">TFT</label>
+          </div>
         <span class="input-group-btn">
           <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
         </span>

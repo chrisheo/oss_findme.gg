@@ -2,7 +2,7 @@ module.exports = function (app) {
 
   var request = require("request");
   var urlenconde = require('urlencode');
-  var apikey = "RGAPI-3f849a35-01f8-4915-a606-87cfc4800ef2"//api
+  var apikey = "RGAPI-20b1defe-a1a0-40b5-abcf-b6e229fad8e9"//api
 
   app.get('/', function (req, res) {
     res.render('main', { title: 'R U TROLL?' });
@@ -71,7 +71,7 @@ module.exports = function (app) {
   app.get('/search/:username/', function(req, res){
     //롤 api url
     name = req.params.username;
-    var nameUrl = "https://kr.api.riotgames.com/lol/summoner/v3/summoners/by-name/" + urlenconde(name)+"?api_key="+ apikey;
+    var nameUrl = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + urlenconde(name)+"?api_key="+ apikey;
     request(nameUrl,function(error,response,body){
       var info_summoner_json = JSON.parse(body);
       accountId = info_summoner_json["accountId"];
