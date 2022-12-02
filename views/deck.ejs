@@ -10,19 +10,21 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <style> @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");</style>
     <script>
-
-    $(document).ready(function(){
-
-
-      $("button#searchButton").click(function(){
-        var name = $("input").val();
-        location.href = "http://localhost:3000/search/" + name;
-      })
-    });
+$(document).ready(function(){
 
 
-
-
+  $("button#searchButton").click(function(){
+    var name = $("input").val();
+    const checkbox = document.getElementById('tft_check');
+    const is_checked = checkbox.checked;
+    if(is_checked==1){
+      location.href = "http://localhost:3000/search/" + name;
+    } else {
+      location.href = "http://localhost:3000/lol/search/" + name;
+    }
+  })
+});
+    
     </script>
   </head>
   <body>
@@ -32,7 +34,11 @@
     </div>
     <div class="center2">
 
-   	<input type="text" class="input_text" placeholder="소환사 이름">
+      <div>
+        <input type="text" class="input_text" placeholder="소환사 이름">
+        <input type="checkbox" id="tft_check" name="tft_check" checked>
+        <label for="tft_check">TFT</label>
+      </div>
     <span class="input-group-btn">
       <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
       
