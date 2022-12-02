@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel="icon" href = "https://teamfighttactics.leagueoflegends.com/static/24eaaf3a8fb2a932281f8990cd93f475/c74cc/pengu.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <style> @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");</style>
+    <script>
+    $(document).ready(function(){
+
+
+      $("button#searchButton").click(function(){
+        var name = $("input").val();
+        location.href = "http://localhost:3000/search/" + name;
+      })
+    });
+    
+    </script>
+  </head>
+  <body>
+
+
+        <div class="imgOpacity">
+        <div class="center">
+          <img src= "https://teamfighttactics.leagueoflegends.com/static/24eaaf3a8fb2a932281f8990cd93f475/c74cc/pengu.png" width = 150, height = 150/>
+        </div>
+        <div class="center2">
+        <input type="text" class="input_text" placeholder="소환사 이름">
+        <span class="input-group-btn">
+          <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
+        </span>
+        </div>
+        </div>
+
+
+
+
+      <br></br>
+      <font size=10em>
+        <strong>
+          <%= c_summoner + "\n"%>
+        </strong>
+      </font>
+
+      <table class="basic">
+            <tbody>
+              <tr><td> <img src= <%=c_imgtier%> width=120, height=120></td></tr>
+              <tr><td><%= "Tier : " + c_tier + " " + c_rank + " / " + c_leaguePoint + "점"%></td></tr>
+              <tr><td><%= "Win : " + c_wins + "   /   Lose : " + c_losses%></td></tr>
+              <tr><td><%= "승률 : " + ((c_wins/(c_wins+c_losses))*100).toFixed(2) + "%" %></td></tr>
+
+
+            </tbody>
+        </table>
+        <div class="center">
+          <strong>
+            <br><%= "--MATCH 1--" %></strong></br>
+          </strong>
+          <strong>
+            
+            <%= "Traits :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgtrait.length; i++){ %>
+            <img src= <%=c_imgtrait[i]%> width=30, height=30>
+            <% } %>
+        </div>
+
+        <div class="center">
+          <strong>
+            <%= "Champions :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgchar.length; i++){ %>
+            <img src= <%=c_imgchar[i]%> width=50, height=50>
+            <% } %>
+        </div>
+        <br></br>
+
+        <div class="center">
+          <strong>
+            <br><%= "--MATCH 2--" %></strong></br>
+          </strong>
+          <strong>
+            
+            <%= "Traits :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgtrait2.length; i++){ %>
+            <img src= <%=c_imgtrait2[i]%> width=30, height=30>
+            <% } %>
+        </div>
+
+        <div class="center">
+          <strong>
+            <%= "Champions :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgchar2.length; i++){ %>
+            <img src= <%=c_imgchar2[i]%> width=50, height=50>
+            <% } %>
+        </div>
+
+        <br></br>
+
+        <div class="center">
+          <strong>
+            <br><%= "--MATCH 3--" %></strong></br>
+          </strong>
+          <strong>
+            
+            <%= "Traits :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgtrait3.length; i++){ %>
+            <img src= <%=c_imgtrait3[i]%> width=30, height=30>
+            <% } %>
+        </div>
+
+        <div class="center">
+          <strong>
+            <%= "Champions :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgchar3.length; i++){ %>
+            <img src= <%=c_imgchar3[i]%> width=50, height=50>
+            <% } %>
+        </div>
+
+        <br></br>
+
+      <br></br>
+
+        </div>
+
+        <table class="basic">
+          <tbody>
+            <img src= <%="https://cdn.lolchess.gg/images/leaderboards/img-tab-rank-color.webp"%> width=150, height=100>
+            <tr><td><%= "---Challenger Players---"%></td></tr>
+            <% for (var i=0; i<c_imgtrait3.length; i++){ %>
+            <tr><td><br><%= (i+1) + "번째 소환사 "%></br></td></tr>
+            <tr><td><%= "Summoner Name : " + c_chname[i]+"   "%><img src= <%="https://cdn.lolchess.gg/images/lol/tier/2022/challenger.png"%> width=30, height=30></td></tr>
+            <tr><td><%= "Tier : " + c_tier + " " + c_rank + " / " + c_chleaguePoint[i] + "점"%></td></tr>
+            <tr><td><%= "Win : " + c_chwins[i] + "   /   Lose : " + c_chlosses[i]%></td></tr>
+            <tr><td><%= "승률 : " + ((c_chwins[i]/(c_chwins[i]+c_chlosses[i]))*100).toFixed(2) + "%" %></td></tr>
+              <% } %>
+            <br></br>
+
+
+          </tbody>
+      </table>
+
+        <div class="center">
+          <strong>
+        <%= "추측 MMR:"  %>
+        <%if (c_tier=="SILVER") {%>
+          <%="1200~1500"%>
+          <%}%>
+        <%if (c_tier=="GOLD") {%>
+          <%="1500~1800"%>
+          <%}%>
+        <%if (c_tier=="PLATINUM") {%>
+          <%="1800~2100"%>
+          <%}%>
+        <%if (c_tier=="DIAMOND") {%>
+          <%="2100~2400"%>
+          <%}%>
+        <%if (c_tier=="MASTER") {%>
+            <%="2400~2600"%>
+            <%}%>
+        <%if (c_tier=="GRANDMASTER") {%>
+            <%="2600~2800"%>
+            <%}%>
+        <%if (c_tier=="CHALLENGER") {%>
+            <%=">3000"%>
+            <%}%>
+      </strong>
+      </div>
+      <% for (var i=0; i<c_id.length-1; i++){ %>
+        <div class="champImage">
+          <div class="center">
+          <img src= <%=c_pic[i]%> width=50, height=50>
+          <%= c_name[i] %>
+          <%= "point: " + (1000000/c_point[i]).toFixed(2) %>
+          <% } %>
+      </div>
+
+
+</div>
+</body>
+</html>

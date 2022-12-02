@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <link rel="icon" href = "https://teamfighttactics.leagueoflegends.com/static/24eaaf3a8fb2a932281f8990cd93f475/c74cc/pengu.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <style> @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");</style>
+    <script>
+
+    $(document).ready(function(){
+
+
+      $("button#searchButton").click(function(){
+        var name = $("input").val();
+        location.href = "http://localhost:3000/search/" + name;
+      })
+    });
+
+
+
+
+    </script>
+  </head>
+  <body>
+    <div class="imgOpacity">
+    <div class="center">
+      <img src= "https://teamfighttactics.leagueoflegends.com/static/24eaaf3a8fb2a932281f8990cd93f475/c74cc/pengu.png" width = 150, height = 150/>
+    </div>
+    <div class="center2">
+
+   	<input type="text" class="input_text" placeholder="소환사 이름">
+    <span class="input-group-btn">
+      <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
+      
+    </span>
+   </div>
+  </div>
+  <br></br>
+  <br></br>
+  <font size=5em>
+    <strong>
+      <%= "First Deck : 동물특공대 싸움꾼" + "\n"%>
+    </strong>
+
+  </font>
+  <div class="center">
+        
+    <strong>
+      
+      <br><%= "Traits :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck1tr.length; i++){ %>
+      <img src= <%=c_deck1tr[i]%> width=30, height=30>
+      <% } %>
+  </div>
+  <div class="center">
+    <strong>
+      <%= "Champions :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck1ch.length; i++){ %>
+      <img src= <%=c_deck1ch[i]%> width=50, height=50>
+      <% } %>
+  </div>
+  <br></br>
+  <font size=5em>
+    <strong>
+      <%= "Second Deck : 5메카 프라임 4에이스" + "\n"%>
+    </strong>
+
+  </font>
+  <div class="center">
+        
+    <strong>
+      
+      <br><%= "Traits :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck2tr.length; i++){ %>
+      <img src= <%=c_deck2tr[i]%> width=30, height=30>
+      <% } %>
+  </div>
+  <div class="center">
+    <strong>
+      <%= "Champions :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck2ch.length; i++){ %>
+      <img src= <%=c_deck2ch[i]%> width=50, height=50>
+      <% } %>
+  </div>
+  <br></br>
+
+  <font size=5em>
+    <strong>
+      <%= "Third Deck : 메카 무법자 드레이븐" + "\n"%>
+    </strong>
+
+  </font>
+  <div class="center">
+        
+    <strong>
+      
+      <br><%= "Traits :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck3tr.length; i++){ %>
+      <img src= <%=c_deck3tr[i]%> width=30, height=30>
+      <% } %>
+  </div>
+  <div class="center">
+    <strong>
+      <%= "Champions :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck3ch.length; i++){ %>
+      <img src= <%=c_deck3ch[i]%> width=50, height=50>
+      <% } %>
+  </div>
+  <br></br>
+
+  <font size=5em>
+    <strong>
+      <%= "Fourth Deck : 4싸움꾼 4특등사수" + "\n"%>
+    </strong>
+
+  </font>
+  <div class="center">
+        
+    <strong>
+      
+      <br><%= "Traits :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck4tr.length; i++){ %>
+      <img src= <%=c_deck4tr[i]%> width=30, height=30>
+      <% } %>
+  </div>
+  <div class="center">
+    <strong>
+      <%= "Champions :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck4ch.length; i++){ %>
+      <img src= <%=c_deck4ch[i]%> width=50, height=50>
+      <% } %>
+  </div>
+  <br></br>
+
+  <font size=5em>
+    <strong>
+      <%= "Third Deck : 5지하세계 특등사수" + "\n"%>
+    </strong>
+
+  </font>
+  <div class="center">
+        
+    <strong>
+      
+      <br><%= "Traits :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck5tr.length; i++){ %>
+      <img src= <%=c_deck5tr[i]%> width=30, height=30>
+      <% } %>
+  </div>
+  <div class="center">
+    <strong>
+      <%= "Champions :  "  %>
+    </strong>
+    <% for (var i=0; i<c_deck5ch.length; i++){ %>
+      <img src= <%=c_deck5ch[i]%> width=50, height=50>
+      <% } %>
+  </div>
+  <br></br>
+
+  
+</body>
+</html>
+    
