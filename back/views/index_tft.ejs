@@ -10,42 +10,32 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <style> @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");</style>
     <script>
-      function search() {
-
-        console.log("---------------------")
-        var tft_check = $("tft_check").val();
-        console.log(tft_check)
-
-        var name = $("input").val();
-        if (tft_check == 1) {
-          location.href = "http://localhost:3000/tft/search/" + name;
-
-        } else {
-          location.href = "http://localhost:3000/search/" + name;
-
-        }
-      }
-
     $(document).ready(function(){
-      
 
-      $("button#searchButton").click(function(){
-        console.log("---------------------")
-        var tft_check = $("tft_check").val();
-        console.log(tft_check)
 
-        var name = $("input").val();
-        if (tft_check == 1) {
-          location.href = "http://localhost:3000/tft/search/" + name;
+        $("button#searchButton").click(function(){
+          var name = $("input").val();
+          const checkbox = document.getElementById('tft_check');
 
-        } else {
-          location.href = "http://localhost:3000/search/" + name;
+          // 2. checked 속성을 체크합니다.
+          const is_checked = checkbox.checked;
+          console.log("-------------------------------")
+          console.log(is_checked)
+          if(is_checked==1){
+            location.href = "http://localhost:3000/tft/search/" + name;
 
-        }
-        
-      })
-    });
+          } else {
+            location.href = "http://localhost:3000/search/" + name;
+
+          }
+          
+  
+})
+});
     </script>
+    <div>
+      <p>tft</p>
+    </div>
   </head>
   <body>
         <div class="imgOpacity">
