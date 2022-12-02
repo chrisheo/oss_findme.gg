@@ -12,12 +12,18 @@
     <script>
     $(document).ready(function(){
 
+      const is_checked = checkbox.checked;
+        $("button#searchButton").click(function(){
+          var name = $("input").val();
+          const checkbox = document.getElementById('tft_check');
 
-      $("button#searchButton").click(function(){
-        var name = $("input").val();
-        location.href = "http://localhost:3000/search/" + name;
-      })
-    });
+          if(is_checked==1){
+            location.href = "http://localhost:3000/search/" + name;
+          } else {
+            location.href = "http://localhost:3000/lol/search/" + name;
+          }
+        })
+});
     
     </script>
   </head>
@@ -29,7 +35,11 @@
           <img src= "https://w.namu.la/s/8cd9553c35562de9ac5685fcc868421f659ec3357582faa2db3031809fc7df6701644c2ac01876532df14659dcfb6f65b9d0b2a627bba35fe103503d7d0a9db2e8a72ea03cc930eaf675629364836cb00f2e26c2a834c1ec79f17fdfc820aae0" width = 300, height = 150/>
         </div>
         <div class="center2">
-        <input type="text" class="input_text" placeholder="소환사 이름">
+          <div>
+            <input type="text" class="input_text" placeholder="소환사 이름">
+            <input type="checkbox" id="tft_check" name="tft_check" checked>
+            <label for="tft_check">TFT</label>
+          </div>
         <span class="input-group-btn">
           <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
         </span>
