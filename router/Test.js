@@ -5,7 +5,6 @@ module.exports = function(app){
     var request = require("request");
     var urlenconde = require('urlencode');
     var apikey = "RGAPI-fa35b84b-6598-4972-b259-41946c1f8860"//api 변경필요
-
     
     var profileIconId;  //아이콘 번호
     var revisionDate; //수정날짜
@@ -190,7 +189,7 @@ module.exports = function(app){
             var ch_leaguePoints = new Array();
             var ch_losses =new Array();
             var ch_wins =new Array();
-            var champions_length = Object.keys(info_champ_json).length;
+            var placement = new Array();
     
         //console.log("\n\ninfo_champ_json\n\n", info_champ_json);
     
@@ -217,6 +216,8 @@ module.exports = function(app){
                   ch_leaguePoints[i] = info_challenger_player[i]["leaguePoints"];
                 }
                 
+                
+  
               var userLeagueUrl = "https://kr.api.riotgames.com/tft/league/v1/entries/by-summoner/"+ urlenconde(id)+"?api_key=" + apikey;
               request(userLeagueUrl,function(error,response,body){
                 var info_user_league_json = JSON.parse(body);
@@ -263,6 +264,7 @@ module.exports = function(app){
                     var k=0;
                     for(var j=0;j<8;j++){
                       if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                        placement[0] = info_game["info"]["participants"][j]["placement"];
                         for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
                     
                           trait_id[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
@@ -274,6 +276,7 @@ module.exports = function(app){
                             
                       }
                     }
+                    
                     for(var i=0;i<char_id.length;i++){
                       
                       if(char_id[i]=="Alistar"){
@@ -551,6 +554,7 @@ module.exports = function(app){
   
                     for(var j=0;j<8;j++){
                       if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                        placement[1] = info_game["info"]["participants"][j]["placement"];
                         for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
                           trait_id2[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
                         }
@@ -837,6 +841,7 @@ module.exports = function(app){
       
                         for(var j=0;j<8;j++){
                           if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                            placement[2] = info_game["info"]["participants"][j]["placement"];
                             for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
                               trait_id3[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
                             }
@@ -849,7 +854,7 @@ module.exports = function(app){
                         
 
                         for(var i=0;i<char_id3.length;i++){
-                      
+                          
                           if(char_id3[i]=="Alistar"){
                             char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
                           }
@@ -1122,9 +1127,10 @@ module.exports = function(app){
                   
                         request(userGameUrl,function(error,response,body){
                             var info_game = JSON.parse(body);
-          
+                            
                             for(var j=0;j<8;j++){
                               if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                                placement[3] = info_game["info"]["participants"][j]["placement"];
                                 for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
                                   trait_id4[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
                                 }
@@ -1413,6 +1419,7 @@ module.exports = function(app){
               
                                 for(var j=0;j<8;j++){
                                   if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                                    placement[4] = info_game["info"]["participants"][j]["placement"];
                                     for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
                                       trait_id5[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
                                     }
@@ -1724,6 +1731,7 @@ module.exports = function(app){
                     ]
                      
                      res.render('index', { title: req.params.username ,
+                     c_placement: placement,
                      c_imgtrait: trait_img,
                      c_imgchar: char_img,
                      c_imgtrait2: trait_img2,
@@ -1765,5 +1773,4 @@ module.exports = function(app){
       });
         });
       });
-      
 };

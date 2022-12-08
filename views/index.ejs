@@ -13,12 +13,12 @@
     $(document).ready(function(){
 
 
-$("button#searchButton").click(function(){
-  var name = $("input").val();
-  location.href = "http://18.205.193.187:3000/search/" + name;
-  
-})
-});
+      $("button#searchButton").click(function(){
+        var name = $("input").val();
+        location.href = "http://localhost:3000/search/" + name;
+      })
+    });
+    
     </script>
   </head>
   <body>
@@ -29,9 +29,7 @@ $("button#searchButton").click(function(){
           <img src= "/main_logo.png" width = 300, height = 150/>
         </div>
         <div class="center2">
-          <div>
-            <input type="text" class="input_text" placeholder="소환사 이름">
-          </div>
+        <input type="text" class="input_text" placeholder="소환사 이름">
         <span class="input-group-btn">
           <button id="searchButton" class="btn btn-primary" type="button" onclick="search(name)">click!</button>
         </span>
@@ -62,6 +60,11 @@ $("button#searchButton").click(function(){
           <strong>
             <br><%= "--MATCH 1--" %></strong></br>
           </strong>
+          <font size = 5em>
+          <strong>
+             <%= "등수 : #" + c_placement[0] %></br>
+          </strong>
+          </font>
           <strong>
             
             <%= "시너지 :  "  %>
@@ -88,6 +91,11 @@ $("button#searchButton").click(function(){
           <strong>
             <br><%= "--MATCH 2--" %></strong></br>
           </strong>
+          <font size = 5em>
+            <strong>
+               <%= "등수 : #" + c_placement[1] %></br>
+            </strong>
+            </font>
           <strong>
             
             <%= "시너지 :  "  %>
@@ -114,6 +122,11 @@ $("button#searchButton").click(function(){
           <strong>
             <br><%= "--MATCH 3--" %></strong></br>
           </strong>
+          <font size = 5em>
+            <strong>
+               <%= "등수 : #" + c_placement[2] %></br>
+            </strong>
+            </font>
           <strong>
             
             <%= "시너지 :  "  %>
@@ -140,6 +153,11 @@ $("button#searchButton").click(function(){
           <strong>
             <br><%= "--MATCH 4--" %></strong></br>
           </strong>
+          <font size = 5em>
+            <strong>
+               <%= "등수 : #" + c_placement[3] %></br>
+            </strong>
+            </font>
           <strong>
             
             <%= "시너지 :  "  %>
@@ -166,6 +184,11 @@ $("button#searchButton").click(function(){
           <strong>
             <br><%= "--MATCH 5--" %></strong></br>
           </strong>
+          <font size = 5em>
+            <strong>
+               <%= "등수 : #" + c_placement[4] %></br>
+            </strong>
+            </font>
           <strong>
             
             <%= "시너지 :  "  %>
