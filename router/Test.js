@@ -4,7 +4,7 @@ module.exports = function(app){
 
     var request = require("request");
     var urlenconde = require('urlencode');
-    var apikey = "RGAPI-a1d7a3c7-1e0a-4c22-83ac-e7b5f122ac83"//api 변경필요
+    var apikey = "RGAPI-fa35b84b-6598-4972-b259-41946c1f8860"//api 변경필요
     
     var profileIconId;  //아이콘 번호
     var revisionDate; //수정날짜
@@ -168,6 +168,16 @@ module.exports = function(app){
             var char_img3=new Array();
             var trait_img3=new Array();
 
+            var trait_id4=new Array();
+            var char_id4=new Array();
+            var char_img4=new Array();
+            var trait_img4=new Array();
+
+            var trait_id5=new Array();
+            var char_id5=new Array();
+            var char_img5=new Array();
+            var trait_img5=new Array();
+
             var info_champ_json = JSON.parse(body);
             var champ_point = new Array();
             var champ_id = new Array();
@@ -194,15 +204,16 @@ module.exports = function(app){
             var staticUrl = "http://ddragon.leagueoflegends.com/cdn/9.23.1/data/en_US/champion.json";
             request(staticUrl,function(error,response,body){
               
-              var challengerplayer = "https://kr.api.riotgames.com/tft/league/v1/challenger?api_key=" + apikey;
+              var challengerplayer = "https://kr.api.riotgames.com/tft/league/v1/entries/PLATINUM/II?page=1&api_key=" + apikey;
               request(challengerplayer,function(error,response,body){
+                
                 var info_challenger_player =JSON.parse(body);
                 for(var i = 0;i<10;i++){
-                  ch_name[i] = info_challenger_player["entries"][i]["summonerName"];
-                  ch_wins[i] = info_challenger_player["entries"][i]["wins"];
-                  ch_losses[i] = info_challenger_player["entries"][i]["losses"];
-                  ch_leaguePoints[i] = info_challenger_player["entries"][i]["leaguePoints"];
-
+        
+                  ch_name[i] = info_challenger_player[i]["summonerName"];
+                  ch_wins[i] = info_challenger_player[i]["wins"];
+                  ch_losses[i] = info_challenger_player[i]["losses"];
+                  ch_leaguePoints[i] = info_challenger_player[i]["leaguePoints"];
                 }
                 
                 
@@ -231,7 +242,7 @@ module.exports = function(app){
                     }else if(tier == "GRANDMASTER"){
                     img_tier = "https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415916978067/Grandmaster_Emblem_2022.png"
                     }else if(tier == "GOLD"){
-                    img_tier = "https://opgg-static.akamaized.net/images/medals_new/gold.png?image=q_auto,f_webp,w_144&v=1669867000997https://i.imgur.com/Ec4hPuO.png"
+                    img_tier = "https://opgg-static.akamaized.net/images/medals_new/gold.png?image=q_auto,f_webp,w_144&v=1669867000997"
                     }else if(tier == "SILVER"){
                     img_tier = "https://opgg-static.akamaized.net/images/medals_new/silver.png?image=q_auto,f_webp,w_144&v=1669867001194"
                     }else if(tier == "BRONZE"){
@@ -240,7 +251,7 @@ module.exports = function(app){
                     else if(tier=="IRON"){
                       img_tier="https://opgg-static.akamaized.net/images/medals_new/iron.png?image=q_auto,f_webp,w_144&v=1669867001194"
                     }else{
-                    img_tier = "https://i.imgur.com/kcdoC4r.png"
+                    img_tier = "https://cdn.lolchess.gg/images/lol/tier/provisional.png"
                     }
                 }
              var userMatchUrl = "https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/"+urlenconde(puuid)+"/ids?start=0&count=20&api_key="+apikey;
@@ -250,11 +261,13 @@ module.exports = function(app){
                   
                 request(userGameUrl,function(error,response,body){
                     var info_game = JSON.parse(body);
-  
+                    var k=0;
                     for(var j=0;j<8;j++){
                       if(info_game["info"]["participants"][j]["puuid"]==puuid){
                         for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
+                    
                           trait_id[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
+                               
                         }
                         for(var k=0;k<info_game["info"]["participants"][j]["units"].length;k++){
                           char_id[k]=info_game["info"]["participants"][j]["units"][k]["character_id"].substr(5,);
@@ -264,262 +277,271 @@ module.exports = function(app){
                     }
                     for(var i=0;i<char_id.length;i++){
                       
-                      if(char_id[i]=="Sejuani"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1653029956.png";
+                      if(char_id[i]=="Alistar"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
                       }
-                      else if(char_id[i]=="AoShin"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/AoShin_1653029477.png";
+                      else if(char_id[i]=="Annie"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Annie_1668168621-Annie.jpg";
                       }
                       else if(char_id[i]=="Aphelios"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1661160970-Aphelios.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1668168612-Aphelios.jpg";
                       }
                       else if(char_id[i]=="AurelionSol"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1653030178.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1668168606-AurelionSol.jpg";
                       }
-                      else if(char_id[i]=="Bard"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Bard_1653029776.png";
+                      else if(char_id[i]=="Ashe"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Ashe_1668168626-Ashe.jpg";
                       }
-                      else if(char_id[i]=="Braum"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Braum_1653029795.png";
+                      else if(char_id[i]=="BelVeth"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Belveth_1668168473-BelVeth.jpg";
                       }
-                      else if(char_id[i]=="Diana"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Diana_1653029713.png";
+                      else if(char_id[i]=="Blitzcrank"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Blitzcrank_1668168485-Blitzcrank.jpg";
                       }
-                      else if(char_id[i]=="Gnar"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Gnar_1653029639.png";
+                      else if(char_id[i]=="Camille"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Camille_1668168802-Camille.jpg";
                       }
-                      else if(char_id[i]=="Graves"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Graves_1661160979-Graves.jpg";
+                      else if(char_id[i]=="Chogath"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Chogath_1668168795-Chogath.jpg";
+                      }
+                      else if(char_id[i]=="Draven"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Draven_1668167910-Draven.jpg";
+                      }
+                      else if(char_id[i]=="Ekko"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Ekko_1668168638-Ekko.jpg";
                       }
                       else if(char_id[i]=="Ezreal"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1653030256.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1668168667-Ezreal.jpg";
                       }
-                      else if(char_id[i]=="Twitch"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
+                      else if(char_id[i]=="Fiddlestick"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Fiddlesticks_1668168825-Fiddlesticks.jpg";
                       }
-                      else if(char_id[i]=="DragonGold"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Idas_1653029461.png";
+                      else if(char_id[i]=="Fiora"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Fiora_1668168836-Fiora.jpg";
+                      }
+                      else if(char_id[i]=="Galio"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Galio_1668167832-Galio.jpg";
+                      }
+                      else if(char_id[i]=="Gangplank"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Gangplank_1668167844-Gangplank.jpg";
+                      }
+                      else if(char_id[i]=="Janna"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Janna_1668168692-Janna.jpg";
                       }
                       else if(char_id[i]=="Jax"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1661160884-Jax.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1668168698-Jax.jpg";
+                      }
+                      else if(char_id[i]=="Jinx"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Jinx_1668168788-Jinx.jpg";
                       }
                       else if(char_id[i]=="Kaisa"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1661160931-Kai%E2%80%99sa.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1668168711-Kaisa.jpg";
                       }
-                      else if(char_id[i]=="Karma"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Karma_1653030340.png";
+                      else if(char_id[i]=="Kayle"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Kayle_1668168735-Kayle.jpg";
+                      }
+                      else if(char_id[i]=="Leblanc"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Leblanc_1668168381-Leblanc.jpg";
                       }
                       else if(char_id[i]=="LeeSin"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1653029760.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1668168399-LeeSin.jpg";
                       }
                       else if(char_id[i]=="Leona"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1653029737.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1668167945-Leona.jpg";
                       }
-                      else if(char_id[i]=="Lillia"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Lillia_1653029767.png";
+                      else if(char_id[i]=="Lulu"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Lulu_1668168372-Lulu.jpg";
                       }
                       else if(char_id[i]=="Lux"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1661161022-Lux.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1668167927-Lux.jpg";
                       }
                       else if(char_id[i]=="Malphite"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1661161013-Malphite.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1668168421-Malphite.jpg";
+                      }
+                      else if(char_id[i]=="MissFortune"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/MissFortune_1668168442-MissFortune.jpg";
+                      }
+                      else if(char_id[i]=="Mordekaiser"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Mordekaiser_1668168435-Mordekaiser.jpg";
                       }
                       else if(char_id[i]=="Nasus"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1661161028-Nasus.jpg";
-                      }
-                      else if(char_id[i]=="Nidalee"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nidalee_1653029698.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1668167855-Nasus.jpg";
                       }
                       else if(char_id[i]=="Nilah"){
-                        char_img[i]="https://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/Nilah.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nilah_1668167902-Nilah.jpg";
                       }
                       else if(char_id[i]=="Nunu"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1653029687.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1668167875-Nunu.jpg";
                       }
-                      else if(char_id[i]=="Olaf"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Olaf_1653030240.png";
+                      else if(char_id[i]=="Poppy"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Poppy_1668168526-Poppy.jpg";
                       }
-                      else if(char_id[i]=="Pantheon"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Pantheon_1661160893-Pantheon.jpg";
-                      }
-                      else if(char_id[i]=="Qiyana"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Qiyana_1653030385.png";
-                      }
-                      else if(char_id[i]=="Rakan"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Rakan_1661161005-Rakan.jpg";
+                      else if(char_id[i]=="Rammus"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Rammus_1668167920-Rammus.jpg";
                       }
                       else if(char_id[i]=="Rell"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1661160999-Rell.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1668168355-Rell.jpg";
                       }
-                      else if(char_id[i]=="Rengar"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Rengar_1661161045-Rengar.jpg";
+                      else if(char_id[i]=="Renekton"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Renekton_1668167936-Renekton.jpg";
+                      }
+                      else if(char_id[i]=="Riven"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Riven_1668168390-Riven.jpg";
+                      }
+                      else if(char_id[i]=="Samira"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Samira_1668168533-Samira.jpg";
+                      }
+                      else if(char_id[i]=="Sejuani"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1668168560-Sejuani.jpg";
                       }
                       else if(char_id[i]=="Senna"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1653029893.png";
-                      }
-                      else if(char_id[i]=="Varus"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Varus_1653029781.png";
-                      }
-                      else if(char_id[i]=="DragonGuild"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zippy_1664508034-Zippy_1661407350-tft7_zippy_square.tft_set7_stage2.png";
-                      }
-                      else if(char_id[i]=="Hecarim"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Hecarim_1653030476.png";
-                      }
-                      else if(char_id[i]=="Jayce"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Jayce_1661160949-Jayce.jpg";
-                      }
-                      else if(char_id[i]=="Sylas"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1653029846.png";
-                      }
-                      else if(char_id[i]=="Taliyah"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1661160902-Taliyah.jpg";
-                      }
-                      else if(char_id[i]=="Twitch"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
-                      }
-                      else if(char_id[i]=="Vladimir"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Vladimir_1653029808.png";
-                      }
-                      else if(char_id[i]=="Seraphine"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Seraphine_1661160986-Seraphine.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1668168549-Senna.jpg";
                       }
                       else if(char_id[i]=="Sett"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1653030015.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1668168568-Sett.jpg";
                       }
-                      else if(char_id[i]=="Shyvana"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Shyvana_1653030108.png";
+                      else if(char_id[i]=="Sivir"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sivir_1668168593-Sivir.jpg";
                       }
-                      else if(char_id[i]=="Skarner"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Skarner_1653030158.png";
+                      else if(char_id[i]=="Sona"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sona_1668168576-Sona.jpg";
                       }
-                      else if(char_id[i]=="_Volibear"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Volibear_1653029788.png";
+                      else if(char_id[i]=="Soraka"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Soraka_1668168584-Soraka.jpg";
+                      }
+                      else if(char_id[i]=="Sylas"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1668168543-Sylas.jpg";
+                      }
+                      else if(char_id[i]=="Syndra"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Syndra_1668168599-Syndra.jpg";
+                      }
+                      else if(char_id[i]=="Taliyah"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1668168820-Taliyah.jpg";
+                      }
+                      else if(char_id[i]=="Talon"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Talon_1668168811-Talon.jpg";
+                      }
+                      else if(char_id[i]=="Urgot"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Urgot_1668168652-Urgot.jpg";
+                      }
+                      else if(char_id[i]=="Vayne"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Vayne_1668168465-Vayne.jpg";
+                      }
+                      else if(char_id[i]=="Velkoz"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Velkoz_1668168479-Velkoz.jpg";
+                      }
+                      else if(char_id[i]=="Vi"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Vi_1668168449-Vi.jpg";
+                      }
+                      else if(char_id[i]=="Viego"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                       }
                       else if(char_id[i]=="Wukong"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1661160962-Wukong.jpg";
-                      }
-                      else if(char_id[i]=="Xayah"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Xayah_1653030304.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                       }
                       else if(char_id[i]=="Yasuo"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1653030213.png";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1668168633-Yasuo.jpg";
                       }
-                      else if(char_id[i]=="Yone"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Yone_1653030248.png";
+                      else if(char_id[i]=="Yuumi"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Yuumi_1668168657-Yuumi.jpg";
                       }
                       else if(char_id[i]=="Zac"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1661160939-Zac.jpg";
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1668168679-Zac.jpg"
                       }
-                      else if(char_id[i]=="Zeri"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zeri_1661160923-Zeri.jpg";
+                      else if(char_id[i]=="Zed"){
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zed_1668168704-Zed.jpg"
                       }
                       else if(char_id[i]=="Zoe"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1653030312.png";
-                      }
-                      else if(char_id[i]=="Zyra"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zyra_1661160955-Zyra.jpg";
-                      }
-                      else if(char_id[i]=="DragonPurple"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Syfen_1653029452.png"
-                      }
-                      else if(char_id[i]=="DragonGreen"){
-                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/ShiOhYu_1653187776.png"
+                        char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1668168742-Zoe.jpg"
                       }
                     }
 
 
                     for(var i=0;i<trait_id.length;i++){
-                    
-                      if(trait_id[i]=="Astral"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Astral_normal_1658472777-astral.svg";
+           
+                      if(trait_id[i]=="Admin"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/ADMIN_normal_1668171639-A.D.M.I.N..svg";
                       }
-                      else if(trait_id[i]=="Darkflight"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Darkflight_normal_1660866323-Darkflight.svg";
+                      else if(trait_id[i]=="AnimaSquad"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/AnimaSquad_normal_1668171609-Anima%20Squad.svg";
                       }
-                      else if(trait_id[i]=="Guild"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Guild_normal_1658472708-guild.svg"
+                      else if(trait_id[i]=="Arsenal"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Arsenal_normal_1668170415-Arsenal.svg"
                       }
-                      else if(trait_id[i]=="Jade"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Jade_normal_1658472802-jade.svg"
+                      else if(trait_id[i]=="Civilian"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Civilian_normal_1668171622-Civillan.svg"
                       }
-                      else if(trait_id[i]=="Lagoon"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Lagoon_normal_1660866433-Lagoon.svg";
+                      else if(trait_id[i]=="Gadgeteen"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Gadgeteen_normal_1668171603-Gadgeteen.svg";
                       }
-                      else if(trait_id[i]=="Mirage"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Mirage_normal_1658472829-mirage.svg"
+                      else if(trait_id[i]=="LaserCorps"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/LaserCorps_normal_1668171618-LaserCorps.svg"
                       }
-                      else if(trait_id[i]=="Monolith"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Monolith_normal_1660866564-Monolith.svg";
+                      else if(trait_id[i]=="ExoPrime"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/MechaPRIME_normal_1668171595-Mecha%20_%20PRIME.svg";
                       }
-                      else if(trait_id[i]=="Prodigy"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Prodigy_normal_1660866635-Prodigy.svg";
+                      else if(trait_id[i]=="OxForce"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/OxForce_normal_1668171649-Ox%20Force.svg";
                       }
-                      else if(trait_id[i]=="Ragewing"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Ragewing_normal_1658472786-ragewing.svg"
+                      else if(trait_id[i]=="StarGuardian"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/StarGuardian_normal_1668171627-Star%20Guardian.svg"
                       }
-                      else if(trait_id[i]=="Revel"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Revel_normal_1658472846-revel.svg"
+                      else if(trait_id[i]=="Supers"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Supers_normal_1668171631-Supers.svg"
                       }
-                      else if(trait_id[i]=="Scalescorn"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Scalescorn_normal_1658472793-scalescorn.svg"
+                      else if(trait_id[i]=="Threat"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Threat_normal_1668171635-Threat.svg"
                       }
-                      else if(trait_id[i]=="Shimmerscale"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Shimmerscale_normal_1658472811-shimmerscale.svg"
+                      else if(trait_id[i]=="Underground"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Underground_normal_1668171645-Underground.svg"
                       }
-                      else if(trait_id[i]=="Assasin"){
-                        trait_img[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/assassin.svg"
+                      else if(trait_id[i]=="Ace"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Ace_normal_1668171455-Ace.svg"
                       }
-                      else if(trait_id[i]=="Cavalier"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Cavalier_normal_1658472863-cavalier.svg"
+                      else if(trait_id[i]=="Aegis"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Aegis_normal_1668171474-Aegis.svg"
                       }
-                      else if(trait_id[i]=="Dragon"){
-                        trait_img[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/dragons.svg"
+                      else if(trait_id[i]=="Brawler"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Brawler_normal_1668171507-Brawler.svg"
                       }
-                      else if(trait_id[i]=="Shapeshifter"){
-                        trait_img[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/shapeshifter.svg"
+                      else if(trait_id[i]=="Corrupted"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Corrupted_normal_1668171552-Corrupted.svg"
                       }
-                      else if(trait_id[i]=="Swiftshot"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Swiftshot_normal_1658472880-swiftshot.svg"
+                      else if(trait_id[i]=="Defender"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Defender_normal_1668171540-Defender.svg"
                       }
-                      else if(trait_id[i]=="Tempest"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Tempest_normal_1658472854-tempest.svg"
+                      else if(trait_id[i]=="Duelist"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Duelist_normal_1668171631-Duelist.svg"
                       }
-                      else if(trait_id[i]=="Whispers"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Whispers_normal_1658472820-whispers.svg";
+                      else if(trait_id[i]=="Forecaster"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Forecaster_normal_1668171558-Forecaster.svg";
                       }
-                      else if(trait_id[i]=="Bard"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Bard_normal_1660832866-bard.svg";
+                      else if(trait_id[i]=="Hacker"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Hacker_normal_1668171706-Hacker.svg";
                       }
-                      else if(trait_id[i]=="Bruiser"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Bruiser_normal_1658472871-bruiser.svg";
+                      else if(trait_id[i]=="Heart"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Heart_normal_1668171662-Heart.svg";
                       }
-                      else if(trait_id[i]=="Cannoneer"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Cannoneer_normal_1660833003-cannoneer%20(1).svg";
+                      else if(trait_id[i]=="Mascot"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Mascot_normal_1668171647-Mascot.svg";
                       }
-                      else if(trait_id[i]=="Dragonmancer"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Dragonmancer_normal_1660832841-dragonmancer.svg";
+                      else if(trait_id[i]=="Prankster"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Prankster_normal_1668171562-Prankster.svg";
                       }
-                      else if(trait_id[i]=="Evoker"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Evoker_normal_1660832889-evoker.svg";
+                      else if(trait_id[i]=="Recon"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Recon_normal_1668171579-Recon.svg";
                       }
-                      else if(trait_id[i]=="Guardian"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Guardian_normal_1660832691-guardian.svg";
+                      else if(trait_id[i]=="Renegade"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Renegade_normal_1668171599-Renegade.svg";
                       }
-                      else if(trait_id[i]=="Mage"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Mage_normal_1660832787-mage.svg";
+                      else if(trait_id[i]=="Spellslinger"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Spellslinger_normal_1668171686-Spellslinger.svg";
                       }
-                      else if(trait_id[i]=="Mystic"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Mystic_normal_1660832723-mystic.svg";
+                      else if(trait_id[i]=="Sureshot"){
+                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Sureshot_normal_1668171615-Sureshot.svg";
                       }
-                      else if(trait_id[i]=="SpellThief"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/SpellThief_normal_1660832955-spellthief.svg";
-                      }
-                      else if(trait_id[i]=="Starcaller"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Starcaller_normal_1658472888-starcaller.svg";
-                      }
-                      else if(trait_id[i]=="Warrior"){
-                        trait_img[i]="https://cdn.lolchess.gg/upload/images/traits/Warrior_normal_1660832913-warrior.svg";
+                      else{
+                        trait_img[i]= "a";
                       }
                     }
 
@@ -540,257 +562,272 @@ module.exports = function(app){
                       }
                     }
                     for(var i=0;i<char_id2.length;i++){
-
-                      if(char_id2[i]=="Sejuani"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1653029956.png";
+                     
+                      if(char_id2[i]=="Alistar"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
                       }
-                      else if(char_id2[i]=="AoShin"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/AoShin_1653029477.png";
+                      else if(char_id2[i]=="Annie"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Annie_1668168621-Annie.jpg";
                       }
                       else if(char_id2[i]=="Aphelios"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1661160970-Aphelios.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1668168612-Aphelios.jpg";
                       }
                       else if(char_id2[i]=="AurelionSol"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1653030178.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1668168606-AurelionSol.jpg";
                       }
-                      else if(char_id2[i]=="Bard"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Bard_1653029776.png";
+                      else if(char_id2[i]=="Ashe"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Ashe_1668168626-Ashe.jpg";
                       }
-                      else if(char_id2[i]=="Braum"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Braum_1653029795.png";
+                      else if(char_id2[i]=="BelVeth"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Belveth_1668168473-BelVeth.jpg";
                       }
-                      else if(char_id2[i]=="Diana"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Diana_1653029713.png";
+                      else if(char_id2[i]=="Blitzcrank"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Blitzcrank_1668168485-Blitzcrank.jpg";
                       }
-                      else if(char_id2[i]=="Gnar"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Gnar_1653029639.png";
+                      else if(char_id2[i]=="Camille"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Camille_1668168802-Camille.jpg";
                       }
-                      else if(char_id2[i]=="Graves"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Graves_1661160979-Graves.jpg";
+                      else if(char_id2[i]=="Chogath"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Chogath_1668168795-Chogath.jpg";
+                      }
+                      else if(char_id2[i]=="Draven"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Draven_1668167910-Draven.jpg";
+                      }
+                      else if(char_id2[i]=="Ekko"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Ekko_1668168638-Ekko.jpg";
                       }
                       else if(char_id2[i]=="Ezreal"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1653030256.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1668168667-Ezreal.jpg";
                       }
-                      else if(char_id2[i]=="Twitch"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
+                      else if(char_id2[i]=="Fiddlestick"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Fiddlesticks_1668168825-Fiddlesticks.jpg";
                       }
-                      else if(char_id2[i]=="DragonGold"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Idas_1653029461.png";
+                      else if(char_id2[i]=="Fiora"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Fiora_1668168836-Fiora.jpg";
+                      }
+                      else if(char_id2[i]=="Galio"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Galio_1668167832-Galio.jpg";
+                      }
+                      else if(char_id2[i]=="Gangplank"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Gangplank_1668167844-Gangplank.jpg";
+                      }
+                      else if(char_id2[i]=="Janna"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Janna_1668168692-Janna.jpg";
                       }
                       else if(char_id2[i]=="Jax"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1661160884-Jax.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1668168698-Jax.jpg";
+                      }
+                      else if(char_id2[i]=="Jinx"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Jinx_1668168788-Jinx.jpg";
                       }
                       else if(char_id2[i]=="Kaisa"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1661160931-Kai%E2%80%99sa.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1668168711-Kaisa.jpg";
                       }
-                      else if(char_id2[i]=="Karma"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Karma_1653030340.png";
+                      else if(char_id2[i]=="Kayle"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Kayle_1668168735-Kayle.jpg";
+                      }
+                      else if(char_id2[i]=="Leblanc"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Leblanc_1668168381-Leblanc.jpg";
                       }
                       else if(char_id2[i]=="LeeSin"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1653029760.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1668168399-LeeSin.jpg";
                       }
                       else if(char_id2[i]=="Leona"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1653029737.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1668167945-Leona.jpg";
                       }
-                      else if(char_id2[i]=="Lillia"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Lillia_1653029767.png";
+                      else if(char_id2[i]=="Lulu"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Lulu_1668168372-Lulu.jpg";
                       }
                       else if(char_id2[i]=="Lux"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1661161022-Lux.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1668167927-Lux.jpg";
                       }
                       else if(char_id2[i]=="Malphite"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1661161013-Malphite.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1668168421-Malphite.jpg";
+                      }
+                      else if(char_id2[i]=="MissFortune"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/MissFortune_1668168442-MissFortune.jpg";
+                      }
+                      else if(char_id2[i]=="Mordekaiser"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Mordekaiser_1668168435-Mordekaiser.jpg";
                       }
                       else if(char_id2[i]=="Nasus"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1661161028-Nasus.jpg";
-                      }
-                      else if(char_id2[i]=="Nidalee"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nidalee_1653029698.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1668167855-Nasus.jpg";
                       }
                       else if(char_id2[i]=="Nilah"){
-                        char_img2[i]="https://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/Nilah.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nilah_1668167902-Nilah.jpg";
                       }
                       else if(char_id2[i]=="Nunu"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1653029687.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1668167875-Nunu.jpg";
                       }
-                      else if(char_id2[i]=="Olaf"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Olaf_1653030240.png";
+                      else if(char_id2[i]=="Poppy"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Poppy_1668168526-Poppy.jpg";
                       }
-                      else if(char_id2[i]=="Pantheon"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Pantheon_1661160893-Pantheon.jpg";
-                      }
-                      else if(char_id2[i]=="Qiyana"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Qiyana_1653030385.png";
-                      }
-                      else if(char_id2[i]=="Rakan"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Rakan_1661161005-Rakan.jpg";
+                      else if(char_id2[i]=="Rammus"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Rammus_1668167920-Rammus.jpg";
                       }
                       else if(char_id2[i]=="Rell"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1661160999-Rell.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1668168355-Rell.jpg";
                       }
-                      else if(char_id2[i]=="Rengar"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Rengar_1661161045-Rengar.jpg";
+                      else if(char_id2[i]=="Renekton"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Renekton_1668167936-Renekton.jpg";
+                      }
+                      else if(char_id2[i]=="Riven"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Riven_1668168390-Riven.jpg";
+                      }
+                      else if(char_id2[i]=="Samira"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Samira_1668168533-Samira.jpg";
+                      }
+                      else if(char_id2[i]=="Sejuani"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1668168560-Sejuani.jpg";
                       }
                       else if(char_id2[i]=="Senna"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1653029893.png";
-                      }
-                      else if(char_id2[i]=="Varus"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Varus_1653029781.png";
-                      }
-                      else if(char_id2[i]=="DragonGuild"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zippy_1664508034-Zippy_1661407350-tft7_zippy_square.tft_set7_stage2.png";
-                      }
-                      else if(char_id2[i]=="Hecarim"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Hecarim_1653030476.png";
-                      }
-                      else if(char_id2[i]=="Jayce"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Jayce_1661160949-Jayce.jpg";
-                      }
-                      else if(char_id2[i]=="Sylas"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1653029846.png";
-                      }
-                      else if(char_id2[i]=="Taliyah"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1661160902-Taliyah.jpg";
-                      }
-                      else if(char_id2[i]=="Twitch"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
-                      }
-                      else if(char_id2[i]=="Vladimir"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Vladimir_1653029808.png";
-                      }
-                      else if(char_id2[i]=="Seraphine"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Seraphine_1661160986-Seraphine.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1668168549-Senna.jpg";
                       }
                       else if(char_id2[i]=="Sett"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1653030015.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1668168568-Sett.jpg";
                       }
-                      else if(char_id2[i]=="Shyvana"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Shyvana_1653030108.png";
+                      else if(char_id2[i]=="Sivir"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sivir_1668168593-Sivir.jpg";
                       }
-                      else if(char_id2[i]=="Skarner"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Skarner_1653030158.png";
+                      else if(char_id2[i]=="Sona"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sona_1668168576-Sona.jpg";
                       }
-                      else if(char_id2[i]=="_Volibear"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Volibear_1653029788.png";
+                      else if(char_id2[i]=="Soraka"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Soraka_1668168584-Soraka.jpg";
+                      }
+                      else if(char_id2[i]=="Sylas"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1668168543-Sylas.jpg";
+                      }
+                      else if(char_id2[i]=="Syndra"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Syndra_1668168599-Syndra.jpg";
+                      }
+                      else if(char_id2[i]=="Taliyah"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1668168820-Taliyah.jpg";
+                      }
+                      else if(char_id2[i]=="Talon"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Talon_1668168811-Talon.jpg";
+                      }
+                      else if(char_id2[i]=="Urgot"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Urgot_1668168652-Urgot.jpg";
+                      }
+                      else if(char_id2[i]=="Vayne"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Vayne_1668168465-Vayne.jpg";
+                      }
+                      else if(char_id2[i]=="Velkoz"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Velkoz_1668168479-Velkoz.jpg";
+                      }
+                      else if(char_id2[i]=="Vi"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Vi_1668168449-Vi.jpg";
+                      }
+                      else if(char_id2[i]=="Viego"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                       }
                       else if(char_id2[i]=="Wukong"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1661160962-Wukong.jpg";
-                      }
-                      else if(char_id2[i]=="Xayah"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Xayah_1653030304.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                       }
                       else if(char_id2[i]=="Yasuo"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1653030213.png";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1668168633-Yasuo.jpg";
                       }
-                      else if(char_id2[i]=="Yone"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Yone_1653030248.png";
+                      else if(char_id2[i]=="Yuumi"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Yuumi_1668168657-Yuumi.jpg";
                       }
                       else if(char_id2[i]=="Zac"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1661160939-Zac.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1668168679-Zac.jpg"
                       }
-                      else if(char_id2[i]=="Zeri"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zeri_1661160923-Zeri.jpg";
+                      else if(char_id2[i]=="Zed"){
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zed_1668168704-Zed.jpg"
                       }
                       else if(char_id2[i]=="Zoe"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1653030312.png";
-                      }
-                      else if(char_id2[i]=="Zyra"){
-                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zyra_1661160955-Zyra.jpg";
+                        char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1668168742-Zoe.jpg"
                       }
                     }
 
 
                     for(var i=0;i<trait_id2.length;i++){
-                    
-                      if(trait_id2[i]=="Astral"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Astral_normal_1658472777-astral.svg";
+           
+                      if(trait_id2[i]=="Admin"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/ADMIN_normal_1668171639-A.D.M.I.N..svg";
                       }
-                      else if(trait_id2[i]=="Darkflight"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Darkflight_normal_1660866323-Darkflight.svg";
+                      else if(trait_id2[i]=="AnimaSquad"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/AnimaSquad_normal_1668171609-Anima%20Squad.svg";
                       }
-                      else if(trait_id2[i]=="Guild"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Guild_normal_1658472708-guild.svg"
+                      else if(trait_id2[i]=="Arsenal"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Arsenal_normal_1668170415-Arsenal.svg"
                       }
-                      else if(trait_id2[i]=="Jade"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Jade_normal_1658472802-jade.svg"
+                      else if(trait_id2[i]=="Civilian"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Civilian_normal_1668171622-Civillan.svg"
                       }
-                      else if(trait_id2[i]=="Lagoon"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Lagoon_normal_1660866433-Lagoon.svg";
+                      else if(trait_id2[i]=="Gadgeteen"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Gadgeteen_normal_1668171603-Gadgeteen.svg";
                       }
-                      else if(trait_id2[i]=="Mirage"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Mirage_normal_1658472829-mirage.svg"
+                      else if(trait_id2[i]=="LaserCorps"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/LaserCorps_normal_1668171618-LaserCorps.svg"
                       }
-                      else if(trait_id2[i]=="Monolith"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Monolith_normal_1660866564-Monolith.svg";
+                      else if(trait_id2[i]=="ExoPrime"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/MechaPRIME_normal_1668171595-Mecha%20_%20PRIME.svg";
                       }
-                      else if(trait_id2[i]=="Prodigy"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Prodigy_normal_1660866635-Prodigy.svg";
+                      else if(trait_id2[i]=="OxForce"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/OxForce_normal_1668171649-Ox%20Force.svg";
                       }
-                      else if(trait_id2[i]=="Ragewing"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Ragewing_normal_1658472786-ragewing.svg"
+                      else if(trait_id2[i]=="StarGuardian"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/StarGuardian_normal_1668171627-Star%20Guardian.svg"
                       }
-                      else if(trait_id2[i]=="Revel"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Revel_normal_1658472846-revel.svg"
+                      else if(trait_id2[i]=="Supers"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Supers_normal_1668171631-Supers.svg"
                       }
-                      else if(trait_id2[i]=="Scalescorn"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Scalescorn_normal_1658472793-scalescorn.svg"
+                      else if(trait_id2[i]=="Threat"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Threat_normal_1668171635-Threat.svg"
                       }
-                      else if(trait_id2[i]=="Shimmerscale"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Shimmerscale_normal_1658472811-shimmerscale.svg"
+                      else if(trait_id2[i]=="Underground"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Underground_normal_1668171645-Underground.svg"
                       }
-                      else if(trait_id2[i]=="Assasin"){
-                        trait_img2[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/assassin.svg"
+                      else if(trait_id2[i]=="Ace"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Ace_normal_1668171455-Ace.svg"
                       }
-                      else if(trait_id2[i]=="Cavalier"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Cavalier_normal_1658472863-cavalier.svg"
+                      else if(trait_id2[i]=="Aegis"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Aegis_normal_1668171474-Aegis.svg"
                       }
-                      else if(trait_id2[i]=="Dragon"){
-                        trait_img2[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/dragons.svg"
+                      else if(trait_id2[i]=="Brawler"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Brawler_normal_1668171507-Brawler.svg"
                       }
-                      else if(trait_id2[i]=="Shapeshifter"){
-                        trait_img2[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/shapeshifter.svg"
+                      else if(trait_id2[i]=="Corrupted"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Corrupted_normal_1668171552-Corrupted.svg"
                       }
-                      else if(trait_id2[i]=="Swiftshot"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Swiftshot_normal_1658472880-swiftshot.svg"
+                      else if(trait_id2[i]=="Defender"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Defender_normal_1668171540-Defender.svg"
                       }
-                      else if(trait_id2[i]=="Tempest"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Tempest_normal_1658472854-tempest.svg"
+                      else if(trait_id2[i]=="Duelist"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Duelist_normal_1668171631-Duelist.svg"
                       }
-                      else if(trait_id2[i]=="Whispers"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Whispers_normal_1658472820-whispers.svg";
+                      else if(trait_id2[i]=="Forecaster"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Forecaster_normal_1668171558-Forecaster.svg";
                       }
-                      else if(trait_id2[i]=="Bard"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Bard_normal_1660832866-bard.svg";
+                      else if(trait_id2[i]=="Hacker"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Hacker_normal_1668171706-Hacker.svg";
                       }
-                      else if(trait_id2[i]=="Bruiser"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Bruiser_normal_1658472871-bruiser.svg";
+                      else if(trait_id2[i]=="Heart"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Heart_normal_1668171662-Heart.svg";
                       }
-                      else if(trait_id2[i]=="Cannoneer"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Cannoneer_normal_1660833003-cannoneer%20(1).svg";
+                      else if(trait_id2[i]=="Mascot"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Mascot_normal_1668171647-Mascot.svg";
                       }
-                      else if(trait_id2[i]=="Dragonmancer"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Dragonmancer_normal_1660832841-dragonmancer.svg";
+                      else if(trait_id2[i]=="Prankster"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Prankster_normal_1668171562-Prankster.svg";
                       }
-                      else if(trait_id2[i]=="Evoker"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Evoker_normal_1660832889-evoker.svg";
+                      else if(trait_id2[i]=="Recon"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Recon_normal_1668171579-Recon.svg";
                       }
-                      else if(trait_id2[i]=="Guardian"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Guardian_normal_1660832691-guardian.svg";
+                      else if(trait_id2[i]=="Renegade"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Renegade_normal_1668171599-Renegade.svg";
                       }
-                      else if(trait_id2[i]=="Mage"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Mage_normal_1660832787-mage.svg";
+                      else if(trait_id2[i]=="Spellslinger"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Spellslinger_normal_1668171686-Spellslinger.svg";
                       }
-                      else if(trait_id2[i]=="Mystic"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Mystic_normal_1660832723-mystic.svg";
+                      else if(trait_id2[i]=="Sureshot"){
+                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Sureshot_normal_1668171615-Sureshot.svg";
                       }
-                      else if(trait_id2[i]=="SpellThief"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/SpellThief_normal_1660832955-spellthief.svg";
-                      }
-                      else if(trait_id2[i]=="Starcaller"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Starcaller_normal_1658472888-starcaller.svg";
-                      }
-                      else if(trait_id2[i]=="Warrior"){
-                        trait_img2[i]="https://cdn.lolchess.gg/upload/images/traits/Warrior_normal_1660832913-warrior.svg";
+                      else{
+                        trait_img2[i]= "a";
                       }
                     }
 
@@ -813,263 +850,850 @@ module.exports = function(app){
                         
 
                         for(var i=0;i<char_id3.length;i++){
-                          
-                          if(char_id3[i]=="Sejuani"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1653029956.png";
+                      
+                          if(char_id3[i]=="Alistar"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
                           }
-                          else if(char_id3[i]=="DragonPurple"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Syfen_1653029452.png";
-                          }
-                          else if(char_id3[i]=="AoShin"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/AoShin_1653029477.png";
+                          else if(char_id3[i]=="Annie"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Annie_1668168621-Annie.jpg";
                           }
                           else if(char_id3[i]=="Aphelios"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1661160970-Aphelios.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1668168612-Aphelios.jpg";
                           }
                           else if(char_id3[i]=="AurelionSol"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1653030178.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1668168606-AurelionSol.jpg";
                           }
-                          else if(char_id3[i]=="Bard"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Bard_1653029776.png";
+                          else if(char_id3[i]=="Ashe"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Ashe_1668168626-Ashe.jpg";
                           }
-                          else if(char_id3[i]=="Braum"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Braum_1653029795.png";
+                          else if(char_id3[i]=="BelVeth"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Belveth_1668168473-BelVeth.jpg";
                           }
-                          else if(char_id3[i]=="Diana"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Diana_1653029713.png";
+                          else if(char_id3[i]=="Blitzcrank"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Blitzcrank_1668168485-Blitzcrank.jpg";
                           }
-                          else if(char_id3[i]=="Gnar"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Gnar_1653029639.png";
+                          else if(char_id3[i]=="Camille"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Camille_1668168802-Camille.jpg";
                           }
-                          else if(char_id3[i]=="Graves"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Graves_1661160979-Graves.jpg";
+                          else if(char_id3[i]=="Chogath"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Chogath_1668168795-Chogath.jpg";
+                          }
+                          else if(char_id3[i]=="Draven"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Draven_1668167910-Draven.jpg";
+                          }
+                          else if(char_id3[i]=="Ekko"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Ekko_1668168638-Ekko.jpg";
                           }
                           else if(char_id3[i]=="Ezreal"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1653030256.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1668168667-Ezreal.jpg";
                           }
-                          else if(char_id3[i]=="Twitch"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
+                          else if(char_id3[i]=="Fiddlestick"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Fiddlesticks_1668168825-Fiddlesticks.jpg";
                           }
-                          else if(char_id3[i]=="DragonGold"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Idas_1653029461.png";
+                          else if(char_id3[i]=="Fiora"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Fiora_1668168836-Fiora.jpg";
+                          }
+                          else if(char_id3[i]=="Galio"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Galio_1668167832-Galio.jpg";
+                          }
+                          else if(char_id3[i]=="Gangplank"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Gangplank_1668167844-Gangplank.jpg";
+                          }
+                          else if(char_id3[i]=="Janna"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Janna_1668168692-Janna.jpg";
                           }
                           else if(char_id3[i]=="Jax"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1661160884-Jax.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1668168698-Jax.jpg";
+                          }
+                          else if(char_id3[i]=="Jinx"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Jinx_1668168788-Jinx.jpg";
                           }
                           else if(char_id3[i]=="Kaisa"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1661160931-Kai%E2%80%99sa.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1668168711-Kaisa.jpg";
                           }
-                          else if(char_id3[i]=="Karma"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Karma_1653030340.png";
+                          else if(char_id3[i]=="Kayle"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Kayle_1668168735-Kayle.jpg";
+                          }
+                          else if(char_id3[i]=="Leblanc"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Leblanc_1668168381-Leblanc.jpg";
                           }
                           else if(char_id3[i]=="LeeSin"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1653029760.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1668168399-LeeSin.jpg";
                           }
                           else if(char_id3[i]=="Leona"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1653029737.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1668167945-Leona.jpg";
                           }
-                          else if(char_id3[i]=="Lillia"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Lillia_1653029767.png";
+                          else if(char_id3[i]=="Lulu"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Lulu_1668168372-Lulu.jpg";
                           }
                           else if(char_id3[i]=="Lux"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1661161022-Lux.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1668167927-Lux.jpg";
                           }
                           else if(char_id3[i]=="Malphite"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1661161013-Malphite.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1668168421-Malphite.jpg";
+                          }
+                          else if(char_id3[i]=="MissFortune"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/MissFortune_1668168442-MissFortune.jpg";
+                          }
+                          else if(char_id3[i]=="Mordekaiser"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Mordekaiser_1668168435-Mordekaiser.jpg";
                           }
                           else if(char_id3[i]=="Nasus"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1661161028-Nasus.jpg";
-                          }
-                          else if(char_id3[i]=="Nidalee"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nidalee_1653029698.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1668167855-Nasus.jpg";
                           }
                           else if(char_id3[i]=="Nilah"){
-                            char_img3[i]="https://ddragon.leagueoflegends.com/cdn/12.22.1/img/champion/Nilah.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nilah_1668167902-Nilah.jpg";
                           }
                           else if(char_id3[i]=="Nunu"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1653029687.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1668167875-Nunu.jpg";
                           }
-                          else if(char_id3[i]=="Olaf"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Olaf_1653030240.png";
+                          else if(char_id3[i]=="Poppy"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Poppy_1668168526-Poppy.jpg";
                           }
-                          else if(char_id3[i]=="Pantheon"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Pantheon_1661160893-Pantheon.jpg";
-                          }
-                          else if(char_id3[i]=="Qiyana"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Qiyana_1653030385.png";
-                          }
-                          else if(char_id3[i]=="Rakan"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Rakan_1661161005-Rakan.jpg";
+                          else if(char_id3[i]=="Rammus"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Rammus_1668167920-Rammus.jpg";
                           }
                           else if(char_id3[i]=="Rell"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1661160999-Rell.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1668168355-Rell.jpg";
                           }
-                          else if(char_id3[i]=="Rengar"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Rengar_1661161045-Rengar.jpg";
+                          else if(char_id3[i]=="Renekton"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Renekton_1668167936-Renekton.jpg";
+                          }
+                          else if(char_id3[i]=="Riven"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Riven_1668168390-Riven.jpg";
+                          }
+                          else if(char_id3[i]=="Samira"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Samira_1668168533-Samira.jpg";
+                          }
+                          else if(char_id3[i]=="Sejuani"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1668168560-Sejuani.jpg";
                           }
                           else if(char_id3[i]=="Senna"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1653029893.png";
-                          }
-                          else if(char_id3[i]=="Varus"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Varus_1653029781.png";
-                          }
-                          else if(char_id3[i]=="DragonGuild"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zippy_1664508034-Zippy_1661407350-tft7_zippy_square.tft_set7_stage2.png";
-                          }
-                          else if(char_id3[i]=="Hecarim"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Hecarim_1653030476.png";
-                          }
-                          else if(char_id3[i]=="Jayce"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Jayce_1661160949-Jayce.jpg";
-                          }
-                          else if(char_id3[i]=="Sylas"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1653029846.png";
-                          }
-                          else if(char_id3[i]=="Taliyah"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1661160902-Taliyah.jpg";
-                          }
-                          else if(char_id3[i]=="Twitch"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Twitch_1653030423.png";
-                          }
-                          else if(char_id3[i]=="Vladimir"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Vladimir_1653029808.png";
-                          }
-                          else if(char_id3[i]=="Seraphine"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Seraphine_1661160986-Seraphine.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1668168549-Senna.jpg";
                           }
                           else if(char_id3[i]=="Sett"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1653030015.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1668168568-Sett.jpg";
                           }
-                          else if(char_id3[i]=="Shyvana"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Shyvana_1653030108.png";
+                          else if(char_id3[i]=="Sivir"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sivir_1668168593-Sivir.jpg";
                           }
-                          else if(char_id3[i]=="Skarner"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Skarner_1653030158.png";
+                          else if(char_id3[i]=="Sona"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sona_1668168576-Sona.jpg";
                           }
-                          else if(char_id3[i]=="_Volibear"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Volibear_1653029788.png";
+                          else if(char_id3[i]=="Soraka"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Soraka_1668168584-Soraka.jpg";
+                          }
+                          else if(char_id3[i]=="Sylas"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1668168543-Sylas.jpg";
+                          }
+                          else if(char_id3[i]=="Syndra"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Syndra_1668168599-Syndra.jpg";
+                          }
+                          else if(char_id3[i]=="Taliyah"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1668168820-Taliyah.jpg";
+                          }
+                          else if(char_id3[i]=="Talon"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Talon_1668168811-Talon.jpg";
+                          }
+                          else if(char_id3[i]=="Urgot"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Urgot_1668168652-Urgot.jpg";
+                          }
+                          else if(char_id3[i]=="Vayne"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Vayne_1668168465-Vayne.jpg";
+                          }
+                          else if(char_id3[i]=="Velkoz"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Velkoz_1668168479-Velkoz.jpg";
+                          }
+                          else if(char_id3[i]=="Vi"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Vi_1668168449-Vi.jpg";
+                          }
+                          else if(char_id3[i]=="Viego"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                           }
                           else if(char_id3[i]=="Wukong"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1661160962-Wukong.jpg";
-                          }
-                          else if(char_id3[i]=="Xayah"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Xayah_1653030304.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                           }
                           else if(char_id3[i]=="Yasuo"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1653030213.png";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1668168633-Yasuo.jpg";
                           }
-                          else if(char_id3[i]=="Yone"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Yone_1653030248.png";
+                          else if(char_id3[i]=="Yuumi"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Yuumi_1668168657-Yuumi.jpg";
                           }
                           else if(char_id3[i]=="Zac"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1661160939-Zac.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1668168679-Zac.jpg"
                           }
-                          else if(char_id3[i]=="Zeri"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zeri_1661160923-Zeri.jpg";
+                          else if(char_id3[i]=="Zed"){
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zed_1668168704-Zed.jpg"
                           }
                           else if(char_id3[i]=="Zoe"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1653030312.png";
-                          }
-                          else if(char_id3[i]=="Zyra"){
-                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zyra_1661160955-Zyra.jpg";
+                            char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1668168742-Zoe.jpg"
                           }
                         }
     
     
                         for(var i=0;i<trait_id3.length;i++){
-                        
-                          if(trait_id3[i]=="Astral"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Astral_normal_1658472777-astral.svg";
+               
+                          if(trait_id3[i]=="Admin"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/ADMIN_normal_1668171639-A.D.M.I.N..svg";
                           }
-                          else if(trait_id3[i]=="Darkflight"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Darkflight_normal_1660866323-Darkflight.svg";
+                          else if(trait_id3[i]=="AnimaSquad"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/AnimaSquad_normal_1668171609-Anima%20Squad.svg";
                           }
-                          else if(trait_id3[i]=="Guild"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Guild_normal_1658472708-guild.svg"
+                          else if(trait_id3[i]=="Arsenal"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Arsenal_normal_1668170415-Arsenal.svg"
                           }
-                          else if(trait_id3[i]=="Jade"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Jade_normal_1658472802-jade.svg"
+                          else if(trait_id3[i]=="Civilian"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Civilian_normal_1668171622-Civillan.svg"
                           }
-                          else if(trait_id3[i]=="Lagoon"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Lagoon_normal_1660866433-Lagoon.svg";
+                          else if(trait_id3[i]=="Gadgeteen"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Gadgeteen_normal_1668171603-Gadgeteen.svg";
                           }
-                          else if(trait_id3[i]=="Mirage"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Mirage_normal_1658472829-mirage.svg"
+                          else if(trait_id3[i]=="LaserCorps"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/LaserCorps_normal_1668171618-LaserCorps.svg"
                           }
-                          else if(trait_id3[i]=="Monolith"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Monolith_normal_1660866564-Monolith.svg";
+                          else if(trait_id3[i]=="ExoPrime"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/MechaPRIME_normal_1668171595-Mecha%20_%20PRIME.svg";
                           }
-                          else if(trait_id3[i]=="Prodigy"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Prodigy_normal_1660866635-Prodigy.svg";
+                          else if(trait_id3[i]=="OxForce"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/OxForce_normal_1668171649-Ox%20Force.svg";
                           }
-                          else if(trait_id3[i]=="Ragewing"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Ragewing_normal_1658472786-ragewing.svg"
+                          else if(trait_id3[i]=="StarGuardian"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/StarGuardian_normal_1668171627-Star%20Guardian.svg"
                           }
-                          else if(trait_id3[i]=="Revel"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Revel_normal_1658472846-revel.svg"
+                          else if(trait_id3[i]=="Supers"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Supers_normal_1668171631-Supers.svg"
                           }
-                          else if(trait_id3[i]=="Scalescorn"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Scalescorn_normal_1658472793-scalescorn.svg"
+                          else if(trait_id3[i]=="Threat"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Threat_normal_1668171635-Threat.svg"
                           }
-                          else if(trait_id3[i]=="Shimmerscale"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Shimmerscale_normal_1658472811-shimmerscale.svg"
+                          else if(trait_id3[i]=="Underground"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Underground_normal_1668171645-Underground.svg"
                           }
-                          else if(trait_id3[i]=="Assasin"){
-                            trait_img3[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/assassin.svg"
+                          else if(trait_id3[i]=="Ace"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Ace_normal_1668171455-Ace.svg"
                           }
-                          else if(trait_id3[i]=="Cavalier"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Cavalier_normal_1658472863-cavalier.svg"
+                          else if(trait_id3[i]=="Aegis"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Aegis_normal_1668171474-Aegis.svg"
                           }
-                          else if(trait_id3[i]=="Dragon"){
-                            trait_img3[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/dragons.svg"
+                          else if(trait_id3[i]=="Brawler"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Brawler_normal_1668171507-Brawler.svg"
                           }
-                          else if(trait_id3[i]=="Shapeshifter"){
-                            trait_img3[i]="https://cdn.lolchess.gg/images/tft/traiticons-darken/7.0/shapeshifter.svg"
+                          else if(trait_id3[i]=="Corrupted"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Corrupted_normal_1668171552-Corrupted.svg"
                           }
-                          else if(trait_id3[i]=="Swiftshot"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Swiftshot_normal_1658472880-swiftshot.svg"
+                          else if(trait_id3[i]=="Defender"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Defender_normal_1668171540-Defender.svg"
                           }
-                          else if(trait_id3[i]=="Tempest"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Tempest_normal_1658472854-tempest.svg"
+                          else if(trait_id3[i]=="Duelist"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Duelist_normal_1668171631-Duelist.svg"
                           }
-                          else if(trait_id3[i]=="Whispers"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Whispers_normal_1658472820-whispers.svg";
+                          else if(trait_id3[i]=="Forecaster"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Forecaster_normal_1668171558-Forecaster.svg";
                           }
-                          else if(trait_id3[i]=="Bard"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Bard_normal_1660832866-bard.svg";
+                          else if(trait_id3[i]=="Hacker"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Hacker_normal_1668171706-Hacker.svg";
                           }
-                          else if(trait_id3[i]=="Bruiser"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Bruiser_normal_1658472871-bruiser.svg";
+                          else if(trait_id3[i]=="Heart"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Heart_normal_1668171662-Heart.svg";
                           }
-                          else if(trait_id3[i]=="Cannoneer"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Cannoneer_normal_1660833003-cannoneer%20(1).svg";
+                          else if(trait_id3[i]=="Mascot"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Mascot_normal_1668171647-Mascot.svg";
                           }
-                          else if(trait_id3[i]=="Dragonmancer"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Dragonmancer_normal_1660832841-dragonmancer.svg";
+                          else if(trait_id3[i]=="Prankster"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Prankster_normal_1668171562-Prankster.svg";
                           }
-                          else if(trait_id3[i]=="Evoker"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Evoker_normal_1660832889-evoker.svg";
+                          else if(trait_id3[i]=="Recon"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Recon_normal_1668171579-Recon.svg";
                           }
-                          else if(trait_id3[i]=="Guardian"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Guardian_normal_1660832691-guardian.svg";
+                          else if(trait_id3[i]=="Renegade"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Renegade_normal_1668171599-Renegade.svg";
                           }
-                          else if(trait_id3[i]=="Mage"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Mage_normal_1660832787-mage.svg";
+                          else if(trait_id3[i]=="Spellslinger"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Spellslinger_normal_1668171686-Spellslinger.svg";
                           }
-                          else if(trait_id3[i]=="Mystic"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Mystic_normal_1660832723-mystic.svg";
+                          else if(trait_id3[i]=="Sureshot"){
+                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Sureshot_normal_1668171615-Sureshot.svg";
                           }
-                          else if(trait_id3[i]=="SpellThief"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/SpellThief_normal_1660832955-spellthief.svg";
-                          }
-                          else if(trait_id3[i]=="Starcaller"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Starcaller_normal_1658472888-starcaller.svg";
-                          }
-                          else if(trait_id3[i]=="Warrior"){
-                            trait_img3[i]="https://cdn.lolchess.gg/upload/images/traits/Warrior_normal_1660832913-warrior.svg";
+                          else{
+                            trait_img3[i]= "a";
                           }
                         }
 
+                        var userGameUrl = "https://asia.api.riotgames.com/tft/match/v1/matches/" + urlenconde(info_match[3]) + "?api_key=" +apikey;
+                  
+                        request(userGameUrl,function(error,response,body){
+                            var info_game = JSON.parse(body);
+          
+                            for(var j=0;j<8;j++){
+                              if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                                for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
+                                  trait_id4[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
+                                }
+                                for(var k=0;k<info_game["info"]["participants"][j]["units"].length;k++){
+                                  char_id4[k]=info_game["info"]["participants"][j]["units"][k]["character_id"].substr(5,);
+                                }
+                                    
+                              }
+                            }
+                            
+    
+                            for(var i=0;i<char_id4.length;i++){
+                          
+                              if(char_id4[i]=="Alistar"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
+                              }
+                              else if(char_id4[i]=="Annie"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Annie_1668168621-Annie.jpg";
+                              }
+                              else if(char_id4[i]=="Aphelios"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1668168612-Aphelios.jpg";
+                              }
+                              else if(char_id4[i]=="AurelionSol"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1668168606-AurelionSol.jpg";
+                              }
+                              else if(char_id4[i]=="Ashe"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Ashe_1668168626-Ashe.jpg";
+                              }
+                              else if(char_id4[i]=="BelVeth"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Belveth_1668168473-BelVeth.jpg";
+                              }
+                              else if(char_id4[i]=="Blitzcrank"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Blitzcrank_1668168485-Blitzcrank.jpg";
+                              }
+                              else if(char_id4[i]=="Camille"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Camille_1668168802-Camille.jpg";
+                              }
+                              else if(char_id4[i]=="Chogath"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Chogath_1668168795-Chogath.jpg";
+                              }
+                              else if(char_id4[i]=="Draven"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Draven_1668167910-Draven.jpg";
+                              }
+                              else if(char_id4[i]=="Ekko"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Ekko_1668168638-Ekko.jpg";
+                              }
+                              else if(char_id4[i]=="Ezreal"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1668168667-Ezreal.jpg";
+                              }
+                              else if(char_id4[i]=="Fiddlestick"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Fiddlesticks_1668168825-Fiddlesticks.jpg";
+                              }
+                              else if(char_id4[i]=="Fiora"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Fiora_1668168836-Fiora.jpg";
+                              }
+                              else if(char_id4[i]=="Galio"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Galio_1668167832-Galio.jpg";
+                              }
+                              else if(char_id4[i]=="Gangplank"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Gangplank_1668167844-Gangplank.jpg";
+                              }
+                              else if(char_id4[i]=="Janna"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Janna_1668168692-Janna.jpg";
+                              }
+                              else if(char_id4[i]=="Jax"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1668168698-Jax.jpg";
+                              }
+                              else if(char_id4[i]=="Jinx"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Jinx_1668168788-Jinx.jpg";
+                              }
+                              else if(char_id4[i]=="Kaisa"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1668168711-Kaisa.jpg";
+                              }
+                              else if(char_id4[i]=="Kayle"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Kayle_1668168735-Kayle.jpg";
+                              }
+                              else if(char_id4[i]=="Leblanc"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Leblanc_1668168381-Leblanc.jpg";
+                              }
+                              else if(char_id4[i]=="LeeSin"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1668168399-LeeSin.jpg";
+                              }
+                              else if(char_id4[i]=="Leona"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1668167945-Leona.jpg";
+                              }
+                              else if(char_id4[i]=="Lulu"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Lulu_1668168372-Lulu.jpg";
+                              }
+                              else if(char_id4[i]=="Lux"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1668167927-Lux.jpg";
+                              }
+                              else if(char_id4[i]=="Malphite"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1668168421-Malphite.jpg";
+                              }
+                              else if(char_id4[i]=="MissFortune"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/MissFortune_1668168442-MissFortune.jpg";
+                              }
+                              else if(char_id4[i]=="Mordekaiser"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Mordekaiser_1668168435-Mordekaiser.jpg";
+                              }
+                              else if(char_id4[i]=="Nasus"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1668167855-Nasus.jpg";
+                              }
+                              else if(char_id4[i]=="Nilah"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Nilah_1668167902-Nilah.jpg";
+                              }
+                              else if(char_id4[i]=="Nunu"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1668167875-Nunu.jpg";
+                              }
+                              else if(char_id4[i]=="Poppy"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Poppy_1668168526-Poppy.jpg";
+                              }
+                              else if(char_id4[i]=="Rammus"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Rammus_1668167920-Rammus.jpg";
+                              }
+                              else if(char_id4[i]=="Rell"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1668168355-Rell.jpg";
+                              }
+                              else if(char_id4[i]=="Renekton"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Renekton_1668167936-Renekton.jpg";
+                              }
+                              else if(char_id4[i]=="Riven"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Riven_1668168390-Riven.jpg";
+                              }
+                              else if(char_id4[i]=="Samira"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Samira_1668168533-Samira.jpg";
+                              }
+                              else if(char_id4[i]=="Sejuani"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1668168560-Sejuani.jpg";
+                              }
+                              else if(char_id4[i]=="Senna"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1668168549-Senna.jpg";
+                              }
+                              else if(char_id4[i]=="Sett"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1668168568-Sett.jpg";
+                              }
+                              else if(char_id4[i]=="Sivir"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Sivir_1668168593-Sivir.jpg";
+                              }
+                              else if(char_id4[i]=="Sona"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Sona_1668168576-Sona.jpg";
+                              }
+                              else if(char_id4[i]=="Soraka"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Soraka_1668168584-Soraka.jpg";
+                              }
+                              else if(char_id4[i]=="Sylas"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1668168543-Sylas.jpg";
+                              }
+                              else if(char_id4[i]=="Syndra"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Syndra_1668168599-Syndra.jpg";
+                              }
+                              else if(char_id4[i]=="Taliyah"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1668168820-Taliyah.jpg";
+                              }
+                              else if(char_id4[i]=="Talon"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Talon_1668168811-Talon.jpg";
+                              }
+                              else if(char_id4[i]=="Urgot"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Urgot_1668168652-Urgot.jpg";
+                              }
+                              else if(char_id4[i]=="Vayne"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Vayne_1668168465-Vayne.jpg";
+                              }
+                              else if(char_id4[i]=="Velkoz"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Velkoz_1668168479-Velkoz.jpg";
+                              }
+                              else if(char_id4[i]=="Vi"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Vi_1668168449-Vi.jpg";
+                              }
+                              else if(char_id4[i]=="Viego"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
+                              }
+                              else if(char_id4[i]=="Wukong"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
+                              }
+                              else if(char_id4[i]=="Yasuo"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1668168633-Yasuo.jpg";
+                              }
+                              else if(char_id4[i]=="Yuumi"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Yuumi_1668168657-Yuumi.jpg";
+                              }
+                              else if(char_id4[i]=="Zac"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1668168679-Zac.jpg"
+                              }
+                              else if(char_id4[i]=="Zed"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Zed_1668168704-Zed.jpg"
+                              }
+                              else if(char_id4[i]=="Zoe"){
+                                char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1668168742-Zoe.jpg"
+                              }
+                            }
+        
+        
+                            for(var i=0;i<trait_id4.length;i++){
+                   
+                              if(trait_id4[i]=="Admin"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/ADMIN_normal_1668171639-A.D.M.I.N..svg";
+                              }
+                              else if(trait_id4[i]=="AnimaSquad"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/AnimaSquad_normal_1668171609-Anima%20Squad.svg";
+                              }
+                              else if(trait_id4[i]=="Arsenal"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Arsenal_normal_1668170415-Arsenal.svg"
+                              }
+                              else if(trait_id4[i]=="Civilian"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Civilian_normal_1668171622-Civillan.svg"
+                              }
+                              else if(trait_id4[i]=="Gadgeteen"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Gadgeteen_normal_1668171603-Gadgeteen.svg";
+                              }
+                              else if(trait_id4[i]=="LaserCorps"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/LaserCorps_normal_1668171618-LaserCorps.svg"
+                              }
+                              else if(trait_id4[i]=="ExoPrime"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/MechaPRIME_normal_1668171595-Mecha%20_%20PRIME.svg";
+                              }
+                              else if(trait_id4[i]=="OxForce"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/OxForce_normal_1668171649-Ox%20Force.svg";
+                              }
+                              else if(trait_id4[i]=="StarGuardian"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/StarGuardian_normal_1668171627-Star%20Guardian.svg"
+                              }
+                              else if(trait_id4[i]=="Supers"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Supers_normal_1668171631-Supers.svg"
+                              }
+                              else if(trait_id4[i]=="Threat"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Threat_normal_1668171635-Threat.svg"
+                              }
+                              else if(trait_id4[i]=="Underground"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Underground_normal_1668171645-Underground.svg"
+                              }
+                              else if(trait_id4[i]=="Ace"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Ace_normal_1668171455-Ace.svg"
+                              }
+                              else if(trait_id4[i]=="Aegis"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Aegis_normal_1668171474-Aegis.svg"
+                              }
+                              else if(trait_id4[i]=="Brawler"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Brawler_normal_1668171507-Brawler.svg"
+                              }
+                              else if(trait_id4[i]=="Corrupted"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Corrupted_normal_1668171552-Corrupted.svg"
+                              }
+                              else if(trait_id4[i]=="Defender"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Defender_normal_1668171540-Defender.svg"
+                              }
+                              else if(trait_id4[i]=="Duelist"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Duelist_normal_1668171631-Duelist.svg"
+                              }
+                              else if(trait_id4[i]=="Forecaster"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Forecaster_normal_1668171558-Forecaster.svg";
+                              }
+                              else if(trait_id4[i]=="Hacker"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Hacker_normal_1668171706-Hacker.svg";
+                              }
+                              else if(trait_id4[i]=="Heart"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Heart_normal_1668171662-Heart.svg";
+                              }
+                              else if(trait_id4[i]=="Mascot"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Mascot_normal_1668171647-Mascot.svg";
+                              }
+                              else if(trait_id4[i]=="Prankster"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Prankster_normal_1668171562-Prankster.svg";
+                              }
+                              else if(trait_id4[i]=="Recon"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Recon_normal_1668171579-Recon.svg";
+                              }
+                              else if(trait_id4[i]=="Renegade"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Renegade_normal_1668171599-Renegade.svg";
+                              }
+                              else if(trait_id4[i]=="Spellslinger"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Spellslinger_normal_1668171686-Spellslinger.svg";
+                              }
+                              else if(trait_id4[i]=="Sureshot"){
+                                trait_img4[i]="https://cdn.lolchess.gg/upload/images/traits/Sureshot_normal_1668171615-Sureshot.svg";
+                              }
+                              else{
+                                trait_img4[i]= "a";
+                              }
+                            }
+
+                            var userGameUrl = "https://asia.api.riotgames.com/tft/match/v1/matches/" + urlenconde(info_match[4]) + "?api_key=" +apikey;
+                  
+                            request(userGameUrl,function(error,response,body){
+                                var info_game = JSON.parse(body);
+              
+                                for(var j=0;j<8;j++){
+                                  if(info_game["info"]["participants"][j]["puuid"]==puuid){
+                                    for(var k=0;k<info_game["info"]["participants"][j]["traits"].length;k++){
+                                      trait_id5[k]=info_game["info"]["participants"][j]["traits"][k]["name"].substr(5,);
+                                    }
+                                    for(var k=0;k<info_game["info"]["participants"][j]["units"].length;k++){
+                                      char_id5[k]=info_game["info"]["participants"][j]["units"][k]["character_id"].substr(5,);
+                                    }
+                                        
+                                  }
+                                }
+                                
+        
+                                for(var i=0;i<char_id5.length;i++){
+                              
+                                  if(char_id5[i]=="Alistar"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Alistar_1668168617-Alistar.jpg";
+                                  }
+                                  else if(char_id5[i]=="Annie"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Annie_1668168621-Annie.jpg";
+                                  }
+                                  else if(char_id5[i]=="Aphelios"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Aphelios_1668168612-Aphelios.jpg";
+                                  }
+                                  else if(char_id5[i]=="AurelionSol"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/AurelionSol_1668168606-AurelionSol.jpg";
+                                  }
+                                  else if(char_id5[i]=="Ashe"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Ashe_1668168626-Ashe.jpg";
+                                  }
+                                  else if(char_id5[i]=="BelVeth"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Belveth_1668168473-BelVeth.jpg";
+                                  }
+                                  else if(char_id5[i]=="Blitzcrank"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Blitzcrank_1668168485-Blitzcrank.jpg";
+                                  }
+                                  else if(char_id5[i]=="Camille"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Camille_1668168802-Camille.jpg";
+                                  }
+                                  else if(char_id5[i]=="Chogath"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Chogath_1668168795-Chogath.jpg";
+                                  }
+                                  else if(char_id5[i]=="Draven"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Draven_1668167910-Draven.jpg";
+                                  }
+                                  else if(char_id5[i]=="Ekko"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Ekko_1668168638-Ekko.jpg";
+                                  }
+                                  else if(char_id5[i]=="Ezreal"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Ezreal_1668168667-Ezreal.jpg";
+                                  }
+                                  else if(char_id5[i]=="Fiddlestick"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Fiddlesticks_1668168825-Fiddlesticks.jpg";
+                                  }
+                                  else if(char_id5[i]=="Fiora"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Fiora_1668168836-Fiora.jpg";
+                                  }
+                                  else if(char_id5[i]=="Galio"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Galio_1668167832-Galio.jpg";
+                                  }
+                                  else if(char_id5[i]=="Gangplank"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Gangplank_1668167844-Gangplank.jpg";
+                                  }
+                                  else if(char_id5[i]=="Janna"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Janna_1668168692-Janna.jpg";
+                                  }
+                                  else if(char_id5[i]=="Jax"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Jax_1668168698-Jax.jpg";
+                                  }
+                                  else if(char_id5[i]=="Jinx"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Jinx_1668168788-Jinx.jpg";
+                                  }
+                                  else if(char_id5[i]=="Kaisa"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Kaisa_1668168711-Kaisa.jpg";
+                                  }
+                                  else if(char_id5[i]=="Kayle"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Kayle_1668168735-Kayle.jpg";
+                                  }
+                                  else if(char_id5[i]=="Leblanc"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Leblanc_1668168381-Leblanc.jpg";
+                                  }
+                                  else if(char_id5[i]=="LeeSin"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/LeeSin_1668168399-LeeSin.jpg";
+                                  }
+                                  else if(char_id5[i]=="Leona"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Leona_1668167945-Leona.jpg";
+                                  }
+                                  else if(char_id5[i]=="Lulu"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Lulu_1668168372-Lulu.jpg";
+                                  }
+                                  else if(char_id5[i]=="Lux"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Lux_1668167927-Lux.jpg";
+                                  }
+                                  else if(char_id5[i]=="Malphite"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Malphite_1668168421-Malphite.jpg";
+                                  }
+                                  else if(char_id5[i]=="MissFortune"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/MissFortune_1668168442-MissFortune.jpg";
+                                  }
+                                  else if(char_id5[i]=="Mordekaiser"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Mordekaiser_1668168435-Mordekaiser.jpg";
+                                  }
+                                  else if(char_id5[i]=="Nasus"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Nasus_1668167855-Nasus.jpg";
+                                  }
+                                  else if(char_id5[i]=="Nilah"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Nilah_1668167902-Nilah.jpg";
+                                  }
+                                  else if(char_id5[i]=="Nunu"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Nunu_1668167875-Nunu.jpg";
+                                  }
+                                  else if(char_id5[i]=="Poppy"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Poppy_1668168526-Poppy.jpg";
+                                  }
+                                  else if(char_id5[i]=="Rammus"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Rammus_1668167920-Rammus.jpg";
+                                  }
+                                  else if(char_id5[i]=="Rell"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Rell_1668168355-Rell.jpg";
+                                  }
+                                  else if(char_id5[i]=="Renekton"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Renekton_1668167936-Renekton.jpg";
+                                  }
+                                  else if(char_id5[i]=="Riven"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Riven_1668168390-Riven.jpg";
+                                  }
+                                  else if(char_id5[i]=="Samira"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Samira_1668168533-Samira.jpg";
+                                  }
+                                  else if(char_id5[i]=="Sejuani"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Sejuani_1668168560-Sejuani.jpg";
+                                  }
+                                  else if(char_id5[i]=="Senna"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Senna_1668168549-Senna.jpg";
+                                  }
+                                  else if(char_id5[i]=="Sett"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Sett_1668168568-Sett.jpg";
+                                  }
+                                  else if(char_id5[i]=="Sivir"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Sivir_1668168593-Sivir.jpg";
+                                  }
+                                  else if(char_id5[i]=="Sona"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Sona_1668168576-Sona.jpg";
+                                  }
+                                  else if(char_id5[i]=="Soraka"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Soraka_1668168584-Soraka.jpg";
+                                  }
+                                  else if(char_id5[i]=="Sylas"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Sylas_1668168543-Sylas.jpg";
+                                  }
+                                  else if(char_id5[i]=="Syndra"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Syndra_1668168599-Syndra.jpg";
+                                  }
+                                  else if(char_id5[i]=="Taliyah"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Taliyah_1668168820-Taliyah.jpg";
+                                  }
+                                  else if(char_id5[i]=="Talon"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Talon_1668168811-Talon.jpg";
+                                  }
+                                  else if(char_id5[i]=="Urgot"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Urgot_1668168652-Urgot.jpg";
+                                  }
+                                  else if(char_id5[i]=="Vayne"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Vayne_1668168465-Vayne.jpg";
+                                  }
+                                  else if(char_id5[i]=="Velkoz"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Velkoz_1668168479-Velkoz.jpg";
+                                  }
+                                  else if(char_id5[i]=="Vi"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Vi_1668168449-Vi.jpg";
+                                  }
+                                  else if(char_id5[i]=="Viego"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
+                                  }
+                                  else if(char_id5[i]=="Wukong"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
+                                  }
+                                  else if(char_id5[i]=="Yasuo"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Yasuo_1668168633-Yasuo.jpg";
+                                  }
+                                  else if(char_id5[i]=="Yuumi"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Yuumi_1668168657-Yuumi.jpg";
+                                  }
+                                  else if(char_id5[i]=="Zac"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Zac_1668168679-Zac.jpg"
+                                  }
+                                  else if(char_id5[i]=="Zed"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Zed_1668168704-Zed.jpg"
+                                  }
+                                  else if(char_id5[i]=="Zoe"){
+                                    char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Zoe_1668168742-Zoe.jpg"
+                                  }
+                                }
+            
+            
+                                for(var i=0;i<trait_id5.length;i++){
+                       
+                                  if(trait_id5[i]=="Admin"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/ADMIN_normal_1668171639-A.D.M.I.N..svg";
+                                  }
+                                  else if(trait_id5[i]=="AnimaSquad"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/AnimaSquad_normal_1668171609-Anima%20Squad.svg";
+                                  }
+                                  else if(trait_id5[i]=="Arsenal"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Arsenal_normal_1668170415-Arsenal.svg"
+                                  }
+                                  else if(trait_id5[i]=="Civilian"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Civilian_normal_1668171622-Civillan.svg"
+                                  }
+                                  else if(trait_id5[i]=="Gadgeteen"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Gadgeteen_normal_1668171603-Gadgeteen.svg";
+                                  }
+                                  else if(trait_id5[i]=="LaserCorps"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/LaserCorps_normal_1668171618-LaserCorps.svg"
+                                  }
+                                  else if(trait_id5[i]=="ExoPrime"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/MechaPRIME_normal_1668171595-Mecha%20_%20PRIME.svg";
+                                  }
+                                  else if(trait_id5[i]=="OxForce"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/OxForce_normal_1668171649-Ox%20Force.svg";
+                                  }
+                                  else if(trait_id5[i]=="StarGuardian"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/StarGuardian_normal_1668171627-Star%20Guardian.svg"
+                                  }
+                                  else if(trait_id5[i]=="Supers"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Supers_normal_1668171631-Supers.svg"
+                                  }
+                                  else if(trait_id5[i]=="Threat"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Threat_normal_1668171635-Threat.svg"
+                                  }
+                                  else if(trait_id5[i]=="Underground"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Underground_normal_1668171645-Underground.svg"
+                                  }
+                                  else if(trait_id5[i]=="Ace"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Ace_normal_1668171455-Ace.svg"
+                                  }
+                                  else if(trait_id5[i]=="Aegis"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Aegis_normal_1668171474-Aegis.svg"
+                                  }
+                                  else if(trait_id5[i]=="Brawler"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Brawler_normal_1668171507-Brawler.svg"
+                                  }
+                                  else if(trait_id5[i]=="Corrupted"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Corrupted_normal_1668171552-Corrupted.svg"
+                                  }
+                                  else if(trait_id5[i]=="Defender"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Defender_normal_1668171540-Defender.svg"
+                                  }
+                                  else if(trait_id5[i]=="Duelist"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Duelist_normal_1668171631-Duelist.svg"
+                                  }
+                                  else if(trait_id5[i]=="Forecaster"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Forecaster_normal_1668171558-Forecaster.svg";
+                                  }
+                                  else if(trait_id5[i]=="Hacker"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Hacker_normal_1668171706-Hacker.svg";
+                                  }
+                                  else if(trait_id5[i]=="Heart"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Heart_normal_1668171662-Heart.svg";
+                                  }
+                                  else if(trait_id5[i]=="Mascot"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Mascot_normal_1668171647-Mascot.svg";
+                                  }
+                                  else if(trait_id5[i]=="Prankster"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Prankster_normal_1668171562-Prankster.svg";
+                                  }
+                                  else if(trait_id5[i]=="Recon"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Recon_normal_1668171579-Recon.svg";
+                                  }
+                                  else if(trait_id5[i]=="Renegade"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Renegade_normal_1668171599-Renegade.svg";
+                                  }
+                                  else if(trait_id5[i]=="Spellslinger"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Spellslinger_normal_1668171686-Spellslinger.svg";
+                                  }
+                                  else if(trait_id5[i]=="Sureshot"){
+                                    trait_img5[i]="https://cdn.lolchess.gg/upload/images/traits/Sureshot_normal_1668171615-Sureshot.svg";
+                                  }
+                                  else{
+                                    trait_img5[i]= "a";
+                                  }
+                                }
 
                     const defaultMMR = [
                       {"mmr" : 900, "tier" : "iron", "rank": 4},
@@ -1107,6 +1731,10 @@ module.exports = function(app){
                      c_imgchar2: char_img2,
                      c_imgtrait3: trait_img3,
                      c_imgchar3: char_img3,
+                     c_imgtrait4: trait_img4,
+                     c_imgchar4: char_img4,
+                     c_imgtrait5: trait_img5,
+                     c_imgchar5: char_img5,
                      c_id: champ_id,
                      c_name: champ_name,
                      c_point: champ_point,
@@ -1129,7 +1757,8 @@ module.exports = function(app){
              });
              });
              });
-
+             });
+             });
             });
             });
           });
