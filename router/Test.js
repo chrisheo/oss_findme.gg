@@ -231,6 +231,7 @@ module.exports = function(app){
                     var rank = info_user_league_json[0]["rank"];
                     var leaguePoints = info_user_league_json[0]["leaguePoints"];
                     var img_tier;
+                    console.log(info_user_league_json)
                     if(tier == "MASTER"){
                     img_tier = "https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415908615571/Master_Emblem_2022.png";
                     }else if(tier == "CHALLENGER"){
@@ -251,7 +252,7 @@ module.exports = function(app){
                     else if(tier=="IRON"){
                       img_tier="https://opgg-static.akamaized.net/images/medals_new/iron.png?image=q_auto,f_webp,w_144&v=1669867001194"
                     }else{
-                    img_tier = "https://cdn.lolchess.gg/images/lol/tier/provisional.png"
+                      img_tier = "https://cdn.lolchess.gg/images/lol/tier/provisional.png"
                     }
                 }
              var userMatchUrl = "https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/"+urlenconde(puuid)+"/ids?start=0&count=20&api_key="+apikey;
@@ -438,7 +439,7 @@ module.exports = function(app){
                       else if(char_id[i]=="Viego"){
                         char_img[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                       }
-                      else if(char_id[i]=="Wukong"){
+                      else if(char_id[i]=="WuKong"){
                         char_img[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                       }
                       else if(char_id[i]=="Yasuo"){
@@ -725,7 +726,7 @@ module.exports = function(app){
                       else if(char_id2[i]=="Viego"){
                         char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                       }
-                      else if(char_id2[i]=="Wukong"){
+                      else if(char_id2[i]=="WuKong"){
                         char_img2[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                       }
                       else if(char_id2[i]=="Yasuo"){
@@ -1014,7 +1015,7 @@ module.exports = function(app){
                           else if(char_id3[i]=="Viego"){
                             char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                           }
-                          else if(char_id3[i]=="Wukong"){
+                          else if(char_id3[i]=="WuKong"){
                             char_img3[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                           }
                           else if(char_id3[i]=="Yasuo"){
@@ -1303,7 +1304,7 @@ module.exports = function(app){
                               else if(char_id4[i]=="Viego"){
                                 char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                               }
-                              else if(char_id4[i]=="Wukong"){
+                              else if(char_id4[i]=="WuKong"){
                                 char_img4[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                               }
                               else if(char_id4[i]=="Yasuo"){
@@ -1592,7 +1593,7 @@ module.exports = function(app){
                                   else if(char_id5[i]=="Viego"){
                                     char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/Viego_1668168492-Viego.jpg"
                                   }
-                                  else if(char_id5[i]=="Wukong"){
+                                  else if(char_id5[i]=="WuKong"){
                                     char_img5[i]="https://cdn.lolchess.gg/upload/images/champions/MonkeyKing_1668168644-Wukong.jpg"
                                   }
                                   else if(char_id5[i]=="Yasuo"){
