@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><%= title %></title>
-    <link rel="icon" href = "https://w.namu.la/s/8cd9553c35562de9ac5685fcc868421f659ec3357582faa2db3031809fc7df6701644c2ac01876532df14659dcfb6f65b9d0b2a627bba35fe103503d7d0a9db2e8a72ea03cc930eaf675629364836cb00f2e26c2a834c1ec79f17fdfc820aae0https://teamfighttactics.leagueoflegends.com/static/24eaaf3a8fb2a932281f8990cd93f475/c74cc/pengu.png">
+    <link rel="icon" href = "/TFT_Logomark_Gold.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -26,7 +26,7 @@ $("button#searchButton").click(function(){
 
         <div class="imgOpacity">
         <div class="center">
-          <img src= "https://w.namu.la/s/8cd9553c35562de9ac5685fcc868421f659ec3357582faa2db3031809fc7df6701644c2ac01876532df14659dcfb6f65b9d0b2a627bba35fe103503d7d0a9db2e8a72ea03cc930eaf675629364836cb00f2e26c2a834c1ec79f17fdfc820aae0" width = 300, height = 150/>
+          <img src= "/main_logo.png" width = 300, height = 150/>
         </div>
         <div class="center2">
           <div>
@@ -67,8 +67,10 @@ $("button#searchButton").click(function(){
             <%= "시너지 :  "  %>
           </strong>
           <% for (var i=0; i<c_imgtrait.length; i++){ %>
-            <img src= <%=c_imgtrait[i]%> width=30, height=30>
+            <% if (c_imgtrait[i] != "a") { %>
+                <img src= <%=c_imgtrait[i]%> width=30, height=30>
             <% } %>
+          <% } %>
         </div>
 
         <div class="center">
@@ -76,6 +78,7 @@ $("button#searchButton").click(function(){
             <%= "챔피언 :  "  %>
           </strong>
           <% for (var i=0; i<c_imgchar.length; i++){ %>
+            
             <img src= <%=c_imgchar[i]%> width=50, height=50>
             <% } %>
         </div>
@@ -90,8 +93,10 @@ $("button#searchButton").click(function(){
             <%= "시너지 :  "  %>
           </strong>
           <% for (var i=0; i<c_imgtrait2.length; i++){ %>
-            <img src= <%=c_imgtrait2[i]%> width=30, height=30>
+            <% if (c_imgtrait2[i] != "a") { %>
+                <img src= <%=c_imgtrait2[i]%> width=30, height=30>
             <% } %>
+          <% } %>
         </div>
 
         <div class="center">
@@ -114,8 +119,10 @@ $("button#searchButton").click(function(){
             <%= "시너지 :  "  %>
           </strong>
           <% for (var i=0; i<c_imgtrait3.length; i++){ %>
-            <img src= <%=c_imgtrait3[i]%> width=30, height=30>
+            <% if (c_imgtrait3[i] != "a") { %>
+                <img src= <%=c_imgtrait3[i]%> width=30, height=30>
             <% } %>
+          <% } %>
         </div>
 
         <div class="center">
@@ -129,6 +136,58 @@ $("button#searchButton").click(function(){
 
         <br></br>
 
+        <div class="center">
+          <strong>
+            <br><%= "--MATCH 4--" %></strong></br>
+          </strong>
+          <strong>
+            
+            <%= "시너지 :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgtrait4.length; i++){ %>
+            <% if (c_imgtrait4[i] != "a") { %>
+                <img src= <%=c_imgtrait4[i]%> width=30, height=30>
+            <% } %>
+          <% } %>
+        </div>
+
+        <div class="center">
+          <strong>
+            <%= "챔피언 :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgchar4.length; i++){ %>
+            <img src= <%=c_imgchar4[i]%> width=50, height=50>
+            <% } %>
+        </div>
+
+        <br></br>
+
+        <div class="center">
+          <strong>
+            <br><%= "--MATCH 5--" %></strong></br>
+          </strong>
+          <strong>
+            
+            <%= "시너지 :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgtrait5.length; i++){ %>
+            <% if (c_imgtrait5[i] != "a") { %>
+                <img src= <%=c_imgtrait5[i]%> width=30, height=30>
+            <% } %>
+          <% } %>
+        </div>
+
+        <div class="center">
+          <strong>
+            <%= "챔피언 :  "  %>
+          </strong>
+          <% for (var i=0; i<c_imgchar5.length; i++){ %>
+            <img src= <%=c_imgchar5[i]%> width=50, height=50>
+            <% } %>
+        </div>
+
+        <br></br>
+
       <br></br>
 
         </div>
@@ -136,11 +195,11 @@ $("button#searchButton").click(function(){
         <table class="basic">
           <tbody>
             <img src= <%="https://cdn.lolchess.gg/images/leaderboards/img-tab-rank-color.webp"%> width=150, height=100>
-            <tr><td><%= "---Challenger Players---"%></td></tr>
-            <% for (var i=0; i<c_imgtrait3.length; i++){ %>
+            <tr><td><%= "---Top Players---"%></td></tr>
+            <% for (var i=0; i<10; i++){ %>
             <tr><td><br><%= (i+1) + "번째 소환사 "%></br></td></tr>
-            <tr><td><%= "Summoner Name : " + c_chname[i]+"   "%><img src= <%="https://cdn.lolchess.gg/images/lol/tier/2022/challenger.png"%> width=30, height=30></td></tr>
-            <tr><td><%= "Tier : " + c_tier + " " + c_rank + " / " + c_chleaguePoint[i] + "점"%></td></tr>
+            <tr><td><%= "Summoner Name : " + c_chname[i]+"   "%><img src= <%="https://opgg-static.akamaized.net/images/medals_new/diamond.png?image=q_auto,f_webp,w_144&v=1669867000997"%> width=30, height=30></td></tr>
+            <tr><td><%= "Tier : " + "Diamond" + " " + "II" + " / " + c_chleaguePoint[i] + "점"%></td></tr>
             <tr><td><%= "Win : " + c_chwins[i] + "   /   Lose : " + c_chlosses[i]%></td></tr>
             <tr><td><%= "승률 : " + ((c_chwins[i]/(c_chwins[i]+c_chlosses[i]))*100).toFixed(2) + "%" %></td></tr>
               <% } %>
