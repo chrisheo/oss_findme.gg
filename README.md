@@ -108,4 +108,4 @@
     + 전체 상위 랭킹 1~10등 정보 열람 가능
 
 ## 라이센스
-- Distributed under the MIT License.
+- Distributed under the MIT License. See License.txt for more information.
