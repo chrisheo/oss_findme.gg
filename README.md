@@ -85,17 +85,27 @@
 
   - https://developer.riotgames.com/
 
-### 2) npm install
 
-  - npm install
 
-### 3) 해당 Repository를 clone 해주세요.
+### 2) 해당 Repository를 clone 해주세요.
 
   - http://khuhub.khu.ac.kr/2018102248/Open_Source_Project.git
+
+### 3) npm install
+
+  - 터미널에서 dependency modules를 설치해줍니다.
 
 ### 4) Test.js를 수정해주세요.
 
   - var apikey = "your api key"
+
+### 5) 실행
+
+  - 터미널에서 app.js를 실행합니다.
+
+  
+
+node app.js
 
 ## 사용 방법
 
