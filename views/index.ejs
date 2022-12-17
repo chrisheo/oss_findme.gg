@@ -221,8 +221,8 @@
             <tr><td><%= "---Top Players---"%></td></tr>
             <% for (var i=0; i<10; i++){ %>
             <tr><td><br><%= (i+1) + "번째 소환사 "%></br></td></tr>
-            <tr><td><%= "Summoner Name : " + c_chname[i]+"   "%><img src= <%="https://opgg-static.akamaized.net/images/medals_new/diamond.png?image=q_auto,f_webp,w_144&v=1669867000997"%> width=30, height=30></td></tr>
-            <tr><td><%= "Tier : " + "Diamond" + " " + "II" + " / " + c_chleaguePoint[i] + "점"%></td></tr>
+            <tr><td><%= "Summoner Name : " + c_chname[i]+"   "%><img src= <%="https://support-leagueoflegends.riotgames.com/hc/article_attachments/4415894930323/Challenger_Emblem_2022.png"%> width=30, height=30></td></tr>
+            <tr><td><%= "Tier : " + "CHALLENGER" + " " + "I" + " / " + c_chleaguePoint[i] + "점"%></td></tr>
             <tr><td><%= "Win : " + c_chwins[i] + "   /   Lose : " + c_chlosses[i]%></td></tr>
             <tr><td><%= "승률 : " + ((c_chwins[i]/(c_chwins[i]+c_chlosses[i]))*100).toFixed(2) + "%" %></td></tr>
               <% } %>
