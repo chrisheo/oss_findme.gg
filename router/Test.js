@@ -4,7 +4,7 @@ module.exports = function(app){
 
     var request = require("request");
     var urlenconde = require('urlencode');
-    var apikey = "RGAPI-fa35b84b-6598-4972-b259-41946c1f8860"//api 변경필요
+    var apikey = "RGAPI-a22a378d-68c6-4383-8c69-a38c32e216d3"//api 변경필요
     
     var profileIconId;  //아이콘 번호
     var revisionDate; //수정날짜
@@ -204,16 +204,16 @@ module.exports = function(app){
             var staticUrl = "http://ddragon.leagueoflegends.com/cdn/9.23.1/data/en_US/champion.json";
             request(staticUrl,function(error,response,body){
               
-              var challengerplayer = "https://kr.api.riotgames.com/tft/league/v1/entries/PLATINUM/II?page=1&api_key=" + apikey;
+              var challengerplayer = "https://kr.api.riotgames.com/tft/league/v1/challenger?api_key=" + apikey;
               request(challengerplayer,function(error,response,body){
                 
                 var info_challenger_player =JSON.parse(body);
                 for(var i = 0;i<10;i++){
         
-                  ch_name[i] = info_challenger_player[i]["summonerName"];
-                  ch_wins[i] = info_challenger_player[i]["wins"];
-                  ch_losses[i] = info_challenger_player[i]["losses"];
-                  ch_leaguePoints[i] = info_challenger_player[i]["leaguePoints"];
+                  ch_name[i] = info_challenger_player["entries"][i]["summonerName"];
+                  ch_wins[i] = info_challenger_player["entries"][i]["wins"];
+                  ch_losses[i] = info_challenger_player["entries"][i]["losses"];
+                  ch_leaguePoints[i] = info_challenger_player["entries"][i]["leaguePoints"];
                 }
                 
                 
